@@ -7,7 +7,7 @@ class Robot
 		@zwinnosc = zwinnosc #zwinność
 		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
 	end	
-	private def initialize(sila, zwinnosc, dodatki)
+	def initialize(sila, zwinnosc, dodatki)
 		@dodatki = dodatki
 		@sila = sila #siła robota
 		@zwinnosc = zwinnosc #zwinność
