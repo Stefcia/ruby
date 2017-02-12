@@ -80,5 +80,40 @@ class Robot
 			return Robot.new(data['sila'], data['zwinnosc'], data['dodatki'])
 		end
 	end
-	
+end
+class RoboPtak < Robot # przychodzi w poziomie II
+	def initialize(skrzydła, nogi, nazwa)
+		@dodatki = []
+		@sila = 901000
+		@skrzydła = skrzydła
+		@nogi = nogi
+		@nazwa = nazwa
+	end
+	def atak 
+		silaw = rand(100)
+		@sila = @sila - (silaw * 2)
+		puts "brawo!! nasz #{@nazwa} grał z ptakiem z siłą #{silaw} wygrał nasz ptak #{@nazwa}!
+		niestety, stracił siłę o #{silaw*2}.
+		teraz ma #{@@sila}."
+	end
+	def as_json(options={})
+		{
+			sila: @sila,
+            zwinnosc: @zwinnosc,
+            dodatki: @dodatki,
+			nazwa: @nazwa,
+			sila: @@sila,
+			skrzydła: @skrzydła,
+			nogi: @nogi
+		}
+	end
+end
+class Wynalazca < Robot # przychodzi w poziomie V
+	@@wynalazki = 1000
+	def initialize(iśrubokrętów, igwoździ, imłotków, iśrubek)
+		@iśrubek = iśrubek
+		@imłotków = imłotków
+		@igwoździ = igwoździ
+		@iśrubokrętów = iśrubokrętów
+	end
 end
