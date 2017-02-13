@@ -110,20 +110,30 @@ class RoboPtak < Robot # przychodzi w poziomie II
 end
 class Wynalazca < Robot # przychodzi w poziomie V
 	@@wynalazki = 1000
+	@@dodatki = {
+			elektryczna_wiertarka: 1000,
+			blacha: 900000,
+			mózg_dla_robota: 6790,
+			drewno: 8980
+		}
 	def initialize(iśrubokrętów, igwoździ, imłotków, iśrubek)
-		@nazwa = ["Lukas3","Lucas67","Pier1","R1","R2","R3",'R4'].sample
+		@nazwa = ["Lukas3","Lucas67","Eltra 34","Pier1","R1","R2","R3",'R4'].sample
 		@iśrubek = iśrubek # ilość śrubek
 		@imłotków = imłotków # ilość młotków
 		@igwoździ = igwoździ # ilość gwóździ
 		@iśrubokrętów = iśrubokrętów # ilość śrubokrętów
-		@zwinnosc = [1,2,89,45,768,8990,12].sample
+		@zwinnosc = [1,2,89,45,768,8990,565656,12].sample
 		@sila = [nil, 0,34,67,nil,4,57,78, 10008320009900].sample
-		@@dodatki = {
-			elektryczna_wiertarka: 100,
-			blacha: 900000,
-			mózg_dla_robota: 6790
-		}
 		@dodatki = {}
+	end
+	def nowe_dodatki (dodatk={elektro_robot: 12, elektro_wojownik: 90})
+		dodatk.each do |nazwa, zgarniano|
+			zgarniano = zgarniano \ 3
+			@@dodatki.each do |no, yes|
+				yes = yes - zgarniono
+			end
+		end
+		@dodatki.merge (dodatk)
 	end
 	def as_json
 		{
@@ -137,5 +147,15 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			ilość_śrub: @iśrubek,
 			wspólne_dodatki: @@dodatki
 		}
+	end
+	def wynalazek
+		puts "robot #{@nazwa} tworzy machinę..."
+		gets.chomp
+		wynalazek = ["robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
+		print "czy chcesz przyjąć od #{@nazwa} machinę: #{wynalazek}(wpisz tak, jeśli tak)?"
+		t = gets.chomp
+		if t == 'tak'
+			@@wynalazki = @@wynalazki - 1
+		end
 	end
 end
