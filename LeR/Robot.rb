@@ -94,7 +94,7 @@ class RoboPtak < Robot # przychodzi w poziomie II
 		@sila = @sila - (silaw * 2)
 		puts "brawo!! nasz #{@nazwa} grał z ptakiem z siłą #{silaw} wygrał nasz ptak #{@nazwa}!
 		niestety, stracił siłę o #{silaw*2}.
-		teraz ma #{@@sila}."
+		teraz ma #{@sila}."
 	end
 	def as_json(options={})
 		{
@@ -111,9 +111,31 @@ end
 class Wynalazca < Robot # przychodzi w poziomie V
 	@@wynalazki = 1000
 	def initialize(iśrubokrętów, igwoździ, imłotków, iśrubek)
-		@iśrubek = iśrubek
-		@imłotków = imłotków
-		@igwoździ = igwoździ
-		@iśrubokrętów = iśrubokrętów
+		@nazwa = ["Lukas3","Lucas67","Pier1","R1","R2","R3",'R4'].sample
+		@iśrubek = iśrubek # ilość śrubek
+		@imłotków = imłotków # ilość młotków
+		@igwoździ = igwoździ # ilość gwóździ
+		@iśrubokrętów = iśrubokrętów # ilość śrubokrętów
+		@zwinnosc = [1,2,89,45,768,8990,12].sample
+		@sila = [nil, 0,34,67,nil,4,57,78, 10008320009900].sample
+		@@dodatki = {
+			elektryczna_wiertarka: 100,
+			blacha: 900000,
+			mózg_dla_robota: 6790
+		}
+		@dodatki = {}
+	end
+	def as_json
+		{
+			nazwa: @nazwa,
+			dodatki: @dodatki,
+			zwinnosc: @zwinnosc,
+			sila: @sila,
+			ilość_śrubokrętów: @iśrubokrętów,
+			ilość_młotków: @imłotków,
+			ilość_gwoździ: @igwoździ,
+			ilość_śrub: @iśrubek,
+			wspólne_dodatki: @@dodatki
+		}
 	end
 end
