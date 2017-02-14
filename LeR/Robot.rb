@@ -122,12 +122,12 @@ class Wynalazca < Robot # przychodzi w poziomie V
 		@imłotków = imłotków # ilość młotków
 		@igwoździ = igwoździ # ilość gwóździ
 		@iśrubokrętów = iśrubokrętów # ilość śrubokrętów
-		@zwinnosc = [1,2,89,45,768,8990,565656,12].sample
+		@zwinnosc = [1,2,89,45,768,8990,565656,12, 89, 74555, 562].sample
 		@sila = [nil, 0,34,67,nil,4,57,78, 10008320009900].sample
 		@dodatki = {}
 		@wynalazkir = []
 	end
-	def nowe_dodatki (dodatk={elektro_robot: 12, elektro_wojownik: 90})
+	def nowe_dodatki (dodatk={elektro_robot: 42, elektro_wojownik: 19})
 		dodatk.each do |nazwa, zgarniano|
 			zgarniano = zgarniano / 3
 			@@dodatki.each do |no, yes|
@@ -139,6 +139,46 @@ class Wynalazca < Robot # przychodzi w poziomie V
 	def as_json(options={})
 		{
 			nazwa: @nazwa,
+			dodatki: @dodatki,
+			zwinnosc: @zwinnosc,
+			siłaa: @sila,
+			ilość_śrubokrętów: @iśrubokrętów,
+			ilość_młotków: @imłotków,
+			ilość_gwoździ: @igwoździ,
+			ilość_śrub: @iśrubek,
+			wspólne_dodatki: @@dodatki,
+			wynalazki: @wynalazkir,
+			ilość_jeszcze_wspólnych_wynalazków: @@wynalazki
+		}
+	end
+	def wynalazek
+		puts "robot #{@nazwa} tworzy machinę..."
+		gets.chomp
+		wynalazek = ["robo-kot","robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
+		print "czy chcesz przyjąć od #{@nazwa} machinę: #{wynalazek}(wpisz tak, jeśli tak)?"
+		t = gets.chomp
+		if t == 'tak'
+			@@wynalazki = @@wynalazki - 1
+			@wynalazkir = @wynalazkir.unshift(wynalazek)
+		end
+	end
+	def self.dodatki(nowe_dodatki_self={wiertarka: 9000})
+		@@dodatki = @@dodatki.merge(nowe_dodatki_self)
+	end
+	def to_s
+		"nazwa: #{@nazwa},
+			dodatki: #{@dodatki},
+			zwinnosc: #{@zwinnosc},
+			siła: #{@sila},
+			ilość śrubokrętów: #{@iśrubokrętów},
+			ilość młotków: #{@imłotków},
+			ilość gwoździ: #{@igwoździ},
+			ilość śrub: #{@iśrubek},
+			wspólne dodatki: #{@@dodatki},
+			wynalazki: #{@wynalazkir},
+			ilość jeszcze wspólnych wynalazków: #{@@wynalazki}"
+	end
+end
 			dodatki: @dodatki,
 			zwinnosc: @zwinnosc,
 			sila: @sila,
