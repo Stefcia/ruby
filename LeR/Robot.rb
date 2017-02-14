@@ -125,17 +125,18 @@ class Wynalazca < Robot # przychodzi w poziomie V
 		@zwinnosc = [1,2,89,45,768,8990,565656,12].sample
 		@sila = [nil, 0,34,67,nil,4,57,78, 10008320009900].sample
 		@dodatki = {}
+		@wynalazkir = []
 	end
 	def nowe_dodatki (dodatk={elektro_robot: 12, elektro_wojownik: 90})
 		dodatk.each do |nazwa, zgarniano|
-			zgarniano = zgarniano \ 3
+			zgarniano = zgarniano / 3
 			@@dodatki.each do |no, yes|
-				yes = yes - zgarniono
+				yes = yes - zgarniano
 			end
 		end
 		@dodatki.merge (dodatk)
 	end
-	def as_json
+	def as_json(options={})
 		{
 			nazwa: @nazwa,
 			dodatki: @dodatki,
@@ -145,17 +146,20 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			ilość_młotków: @imłotków,
 			ilość_gwoździ: @igwoździ,
 			ilość_śrub: @iśrubek,
-			wspólne_dodatki: @@dodatki
+			wspólne_dodatki: @@dodatki,
+			wynalazki: @wynalazkir,
+			ilość_jeszcze_wspólnych_wynalazków: @@wynalazki
 		}
 	end
 	def wynalazek
 		puts "robot #{@nazwa} tworzy machinę..."
 		gets.chomp
-		wynalazek = ["robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
+		wynalazek = ["robo-kot","robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
 		print "czy chcesz przyjąć od #{@nazwa} machinę: #{wynalazek}(wpisz tak, jeśli tak)?"
 		t = gets.chomp
 		if t == 'tak'
 			@@wynalazki = @@wynalazki - 1
+			@wynalazkir = @wynalazkir.unshift(wynalazek)
 		end
 	end
 end
