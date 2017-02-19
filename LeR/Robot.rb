@@ -3,18 +3,29 @@ require 'tempfile'
 class Robot
 	def initialize(sila, zwinnosc)
 		@dodatki = []
+		@wynalazki = []
+		@mądrość = rand(8909000000)
 		@sila = sila #siła robota
 		@zwinnosc = zwinnosc #zwinność
 		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
 	end	
-	def initialize(sila, zwinnosc, dodatki)
+	def initialize(sila, zwinnosc, dodatki, nazwa='Orro7')
 		@dodatki = dodatki
 		@sila = sila #siła robota
 		@zwinnosc = zwinnosc #zwinność
 		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
 	end	
+	def nazwa= (nowa_nazwa)
+		@nazwa = nowa_nazwa
+	end
+	def nazwa
+		@nazwa
+	end
 	def to_s
-		"To jest robot r_#{object_id}. Jego sila to #{@sila} a zwinnosc to #{@zwinnosc} i ma dodatki: #{dodatki}."
+		"To jest robot r_#{object_id}.Jego sila to #{@sila} a zwinnosc to #{@zwinnosc} i ma dodatki: #{dodatki}.
+		ma nazwę: #{@nazwa}.
+		wynalazki: #{@wynalazki}.
+		mądrość: #{@mądrość}"
 	end
 	def sila= (nowa_sila)
 		@sila = nowa_sila
@@ -255,8 +266,8 @@ class Lekarz < Robot # przychodzi w poziomi X.
 		}
 	end
 end
-r1 = Robot.new(34,56,[])
-r2 = RoboPtak.new(2,5,"Ullo70")
-r3 = Wynalazca.new(67,78,89,90)
-r4 = Lekarz.new(45)
-domyślne_roboty = [r1,r2,r3,r4]
+r1 = Robot.new(45,80,["ogienne rękawiczki"],"Orro7")
+r2 = RoboPtak.new(70,65,"Ullo70")
+r3 = Wynalazca.new(677,50,455,677)
+r4 = Lekarz.new(666)
+domyślne_roboty = ["#{r1}","#{r2}","#{r3}","#{r4}"]
