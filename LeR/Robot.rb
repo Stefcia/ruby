@@ -122,7 +122,7 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			mózg_dla_robota: 6790,
 			drewno: 8980
 		}
-	def initialize(iśrubokrętów, igwoździ, imłotków, iśrubek)
+	def initialize(iśrubokrętów=45, igwoździ=56, imłotków=45, iśrubek=56)
 		@nazwa = ["Lucas3","Eltra#{[67,1,2,142,2,34,67,475,76].sample}","R#{[5,6,7,8,9,10,11,12,13,14,151,16,15,17,nil,18,19,20].sample}","Lucas#{[90,900,1,2,3,4,5,7,6,7,8,nil].sample}","Lucas67","Eltra 34","Pierd1","R1","R2","R3",'R4',"Pierd#{1,2,3,4,5,6,7,8,9,10,45,1797,nil}"].sample
 		@iśrubek = iśrubek # ilość śrubek
 		@imłotków = imłotków # ilość młotków
@@ -157,7 +157,7 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			ilość_jeszcze_wspólnych_wynalazków: @@wynalazki
 		}
 	end
-	def wynalazek
+	def wynalazek2
 		puts "robot #{@nazwa} tworzy machinę..."
 		gets.chomp
 		wynalazek = ["robo-kot","robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
@@ -212,12 +212,51 @@ class Wynalazca < Robot # przychodzi w poziomie V
 	end
 end
 class Lekarz < Robot # przychodzi w poziomi X.
-	@@punkty = 1000
-	@@dodatki = {
+	@@punkty = 2947
+	@@nieosobiste_dodatki = {
 		robo_strzykawka: 78,
 		"robo-słuchawka do słuchania pulsowania śrubek" => 6909
 	}
 	def initialize(mądrość=[9,12,23,34,100,20,19,18,17,16,1000,167].sample)
 		@mądrość = mądrość
+		@zwinnosc = [45,34,45,163,66].sample
+		@siła = [12,35,636,7685,454512].sample
+		@dodatki = []
+		@nazwa = ["Lucas50","Ullo60","Olli10","Robo40","Linno5","Etto30","Tikko20","Osa100"].sample
+	end
+	def self.co?
+		puts "robot #{@nazwa} ma punkty: #{@@punkty},
+		i ma dodatki: #{@@dodatki}"
+	end
+	def self.dd (new_dd={})
+		new_dd.each do |klucz, no_klucz|
+			print "czy chcesz mieć w #{@@dodatki}: {#{klucz}: #{no_klucz}}?"
+			tt = gets.chomp
+			if tt == 'tak'
+				@@nieosobiste_dodatki = @@nieosbiste_dodatki.merge({"#{klucz}" => no_klucz})
+			end
+		end
+	end
+	def self.dodatki
+		return @@nieosobiste_dodatki
+	end
+	def self.punkty
+		return @@punkty
+	end
+	def as_json(options={})
+		{
+			nazwa: @nazwa,
+			siła: @siła,
+			zwinność: @zwinnosc,
+			dodatki: @dodatki,
+			mądrość: @mądrość,
+			ilość_wspólnych_dodatków: @@nieosobiste_dodatki,
+			wspólne_punkty: @@punkty
+		}
 	end
 end
+r1 = Robot.new(34,56,[])
+r2 = RoboPtak.new(2,5,"Ullo70")
+r3 = Wynalazca.new(67,78,89,90)
+r4 = Lekarz.new(45)
+domyślne_roboty = [r1,r2,r3,r4]
