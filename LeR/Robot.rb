@@ -80,6 +80,12 @@ class Robot
 			return Robot.new(data['sila'], data['zwinnosc'], data['dodatki'])
 		end
 	end
+	def what_json?
+		save = save_json
+		file = File.open(save, 'r')
+		return file.read
+		file.close
+	end
 end
 class RoboPtak < Robot # przychodzi w poziomie II
 	def initialize(skrzydła, nogi, nazwa)
@@ -117,7 +123,7 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			drewno: 8980
 		}
 	def initialize(iśrubokrętów, igwoździ, imłotków, iśrubek)
-		@nazwa = ["Lukas3","Lucas67","Eltra 34","Pier1","R1","R2","R3",'R4'].sample
+		@nazwa = ["Lucas3","Eltra#{[67,1,2,142,2,34,67,475,76].sample}","R#{[5,6,7,8,9,10,11,12,13,14,151,16,15,17,nil,18,19,20].sample}","Lucas#{[90,900,1,2,3,4,5,7,6,7,8,nil].sample}","Lucas67","Eltra 34","Pierd1","R1","R2","R3",'R4',"Pierd#{1,2,3,4,5,6,7,8,9,10,45,1797,nil}"].sample
 		@iśrubek = iśrubek # ilość śrubek
 		@imłotków = imłotków # ilość młotków
 		@igwoździ = igwoździ # ilość gwóździ
@@ -177,8 +183,10 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			wspólne dodatki: #{@@dodatki},
 			wynalazki: #{@wynalazkir},
 			ilość jeszcze wspólnych wynalazków: #{@@wynalazki}"
-	end
-end
+			end
+		end
+		def as_json(options={})
+			{
 			dodatki: @dodatki,
 			zwinnosc: @zwinnosc,
 			sila: @sila,
@@ -201,5 +209,15 @@ end
 			@@wynalazki = @@wynalazki - 1
 			@wynalazkir = @wynalazkir.unshift(wynalazek)
 		end
+	end
+end
+class Lekarz < Robot # przychodzi w poziomi X.
+	@@punkty = 1000
+	@@dodatki = {
+		robo_strzykawka: 78,
+		"robo-słuchawka do słuchania pulsowania śrubek" => 6909
+	}
+	def initialize(mądrość=[9,12,23,34,100,20,19,18,17,16,1000,167].sample)
+		@mądrość = mądrość
 	end
 end
