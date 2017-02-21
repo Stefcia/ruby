@@ -4,13 +4,15 @@ class Robot
 	def initialize(sila, zwinnosc)
 		@dodatki = []
 		@wynalazki = []
-		@mądrość = rand(8909000000)
+		@mądrość = rand(8908)
 		@sila = sila #siła robota
 		@zwinnosc = zwinnosc #zwinność
 		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
 	end	
-	def initialize(sila, zwinnosc, dodatki, nazwa='Orro7')
+	def initialize(sila,zdolność_ataku=10,zdolność_obrony=90, zwinnosc, dodatki, nazwa='Orro7')
 		@dodatki = dodatki
+		@zdolność_obrony = zdolność_obrony
+		@zdolność_ataku = zdolność_ataku
 		@sila = sila #siła robota
 		@zwinnosc = zwinnosc #zwinność
 		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
@@ -23,9 +25,9 @@ class Robot
 	end
 	def to_s
 		"To jest robot r_#{object_id}.Jego sila to #{@sila} a zwinnosc to #{@zwinnosc} i ma dodatki: #{dodatki}.
-		ma nazwę: #{@nazwa}.
-		wynalazki: #{@wynalazki}.
-		mądrość: #{@mądrość}"
+		 ma nazwę: #{@nazwa}.
+		 wynalazki: #{@wynalazki}.
+		 mądrość: #{@mądrość}."
 	end
 	def sila= (nowa_sila)
 		@sila = nowa_sila
@@ -271,3 +273,6 @@ r2 = RoboPtak.new(70,65,"Ullo70")
 r3 = Wynalazca.new(677,50,455,677)
 r4 = Lekarz.new(666)
 domyślne_roboty = ["#{r1}","#{r2}","#{r3}","#{r4}"]
+def zapisz_roboty_w_(gdzie, roboty)
+	roboty
+end
