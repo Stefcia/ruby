@@ -302,13 +302,42 @@ class Lekarz < Robot # przychodzi w poziomi X.
 		}
 	end
 end
+class Potworek < Robot
+	@@dodatki = {
+		bat: 900,
+		robo_konik: 678,
+		mini_robo_wynalazca: 78890,
+		mini_roboty_waleczne_pszczoły: 689
+	}
+	def initalize(siła=34, zwinność=45, zdolność_ataku=67, zdolność_obrony=67, nazwa=nil)
+		@siła = siła
+		@dodatki = {}
+		@zdolność_ataku = zdolność_ataku
+		@zwinność = zwinność
+		@zdolność_obrony = zdolność_obrony
+		if @nazwa != nil
+			@nazwa = nazwa
+		else
+			print "wpisz nazwę dla roboto-potwora(jeżeli wpiszesz nic, nazwa potwora zostanie
+			 automatycznie wybrana):"
+			nowa_nazwa = gets.chomp
+			elsif nowa_nazwa != nil
+				@nazwa = nowa_nazwa
+			else
+				@nazwa = ["#{["Tictoc67",'Orto45'].sample}","Korto#{[1,2,3,4,5,6,7,8,9,10].sample}", "Korto", "R#{[2,1,3,34,45,678,900].sample}"].sample
+			end
+		end
+	end
+end
 r1 = Robot.new(45,80,["ogienne rękawiczki"],"Orro7")
 r2 = RoboPtak.new(70,65,"Ullo70")
 r3 = Wynalazca.new(677,50,455,677)
 r4 = Lekarz.new(666)
-domyślne_roboty = ["#{r1}","#{r2}","#{r3}","#{r4}"]
+r5 = Potworek.new(12,34,34,12,"Traktoe450")
+domyślne_roboty = ["#{r1}","#{r2}","#{r5}","#{r3}","#{r4}"]
 def zapisz_roboty_w_(gdzie, *roboty)
-	*roboty.each do |Robocik|
+	*roboty = roboty
+	roboty.each do |Robocik|
 		print "czy nasz robot '#{Robocik}' ma być w pliku #{gdzie}(wpisz tak, jeżeli tak)?"
 		tlubn = gets.chomp
 		if tlubn == 'tak'
