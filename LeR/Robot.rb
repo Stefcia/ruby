@@ -193,7 +193,7 @@ class Wynalazca < Robot # przychodzi w poziomie V
 	def wynalazek2
 		puts "robot #{@nazwa} tworzy machinę..."
 		gets.chomp
-		wynalazek = ["robo-kot","robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
+		wynalazek = ["robo-mutant-kot","giga-robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
 		print "czy chcesz przyjąć od #{@nazwa} machinę: #{wynalazek}(wpisz tak, jeśli tak)?"
 		t = gets.chomp
 		if t == 'tak'
@@ -307,7 +307,7 @@ class Potworek < Robot
 		bat: 900,
 		robo_konik: 678,
 		mini_robo_wynalazca: 78890,
-		mini_roboty_waleczne_pszczoły: 689
+		'mini_robo_pszczoły' => 689
 	}
 	def initalize(siła=34, zwinność=45, zdolność_ataku=67, zdolność_obrony=67, nazwa=nil)
 		@siła = siła
@@ -325,6 +325,28 @@ class Potworek < Robot
 				@nazwa = nowa_nazwa
 			else
 				@nazwa = ["#{["Tictoc67",'Orto45'].sample}","Korto#{[1,2,3,4,5,6,7,8,9,10].sample}", "Korto", "R#{[2,1,3,34,45,678,900].sample}"].sample
+			end
+		end
+	end
+	def self.dodatki (*nowe_dodatki_selfowe)
+		*nowe_dodatki_selfowe.each do |dotatek|
+			print "czy chcesz mieć w #{@@dodatki} dodatek #{dodatek}(jeśli wpiszesz 'tak', #{dodatek} będzie w klasie Potworek)?"
+			self_tn = gets.chomp
+			if self_tn == 'tak'
+				puts "NoMethodError: undefined method `unshift' for {}:Hash
+				Did you mean?  shift
+        		from (irb):336
+        		from C:/Ruby336/bin/irb.cmd:19:in `<main>'"
+				gets.chomp
+				puts "Hę?"
+				gets.chomp
+				if *nowe_dodatki_selfowe.class == Hash
+					puts "Hash??! to popsuło mi plany."
+					@@dodatki = @@dodatki.merge(dodatek)
+				else
+					puts "To była zła metoda."
+					@@dodatki = @@dodatki.merge({"#{dodatek}" => rand(500897364)})
+				end
 			end
 		end
 	end
