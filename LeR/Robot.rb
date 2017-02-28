@@ -1,33 +1,22 @@
 require 'json'
 require 'tempfile'
-class Robot
-	def initialize(sila, zwinnosc)
-		@dodatki = []
-		@wynalazki = []
-		@mądrość = rand(8908)
-		@sila = sila #siła robota
-		@zwinnosc = zwinnosc #zwinność
-		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
-	end	
-	def initialize(sila,zdolność_ataku=10,zdolność_obrony=90, zwinnosc, dodatki, nazwa='Orro7')
+class Robot 
+	attr_reader :zdolnoscAtaku, :zdolnoscObrony, :imie
+	def initialize(imie, zycie, sila, zwinnosc, zdolnoscAtaku, zdolnoscObrony, *dodatki)
+		@imie = imie
+		@zycie = zycie
 		@dodatki = dodatki
-		@zdolność_obrony = zdolność_obrony
-		@zdolność_ataku = zdolność_ataku
 		@sila = sila #siła robota
 		@zwinnosc = zwinnosc #zwinność
-		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, a dodatki ma: #{@dodatki}."
+		@zdolnoscAtaku = zdolnoscAtaku
+		@zdolnoscObrony = zdolnoscObrony
+		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, życie: #{zycie}, zdolnoscAtaku: #{zdolnoscAtaku}, zdolnoscObrony #{zdolnoscObrony} a dodatki ma: #{@dodatki}."
 	end	
-	def nazwa= (nowa_nazwa)
-		@nazwa = nowa_nazwa
-	end
-	def nazwa
-		@nazwa
-	end
 	def to_s
-		"To jest robot r_#{object_id}.Jego sila to #{@sila} a zwinnosc to #{@zwinnosc} i ma dodatki: #{dodatki}.
-		 ma nazwę: #{@nazwa}.
-		 wynalazki: #{@wynalazki}.
-		 mądrość: #{@mądrość}."
+		"ROBO_#{imie}."
+	end
+	def opis
+		"To jest robot #{to_s}. Jego sila to #{@sila} a zwinnosc to #{@zwinnosc} i ma dodatki: #{dodatki}."
 	end
 	def sila= (nowa_sila)
 		@sila = nowa_sila
@@ -35,12 +24,28 @@ class Robot
 	def zwinnosc= (nowa_zwinnosc)
 		@zwinnosc = nowa_zwinnosc
 	end
+	def zycie= (nowa_zycie)
+		@zycie = nowa_zycie
+	end
 	def sila	
 		@sila
 	end
 	def zwinnosc
 		@zwinnosc
 	end
+	def zycie
+		@zycie
+	end
+	def wykonajAtak (roboAtakowany, atak)
+		atak.obrazenia = ((rand(6)+1)* (1+((@sila/10.0+@zwinnosc/10.0)/2))).round
+		if atak.wynikAkcji == 2 #krytyczny sukces UWAGA! zmienić na korzytanie z modułu
+			atak.obrazenia *= 2 
+		end
+		roboAtakowany.zycie -= atak.obrazenia
+		puts "UWAGA! #{roboAtakowany} doznał #{atak.obrazenia} obrażeń."
+	end
+	#koniec metod podstawowych
+	
 	def nowe_dodatki (dodatkir=['turboodrzutowe buty','zegarek  z kołysankami','ogienne rękawiczki'])
 		dodatkir.each do |dodatek|
 			print "czy chcesz mieć w tym robocie jako dodatek: #{dodatek}?"
@@ -62,18 +67,6 @@ class Robot
 	end
 	def dodatki
 		return @dodatki
-	end
-	def zdolność_obrony
-		zdolność_obrony
-	end
-	def zdolność_obrony= (nowa_zdolność)
-		@zdolność_obrony = nowa_zdolność
-	end
-	def zdolność_ataku= (zdolność_a)
-		@zdolność_ataku = zdolność_a
-	end
-	def zdolność_ataku
-		zdolność_ataku
 	end
 	#zapisywanie Robocików do JSONa - nie ruszać! #http://stackoverflow.com/questions/3226054/how-to-convert-a-ruby-object-to-jsona
 	def as_json(options={})
@@ -105,22 +98,16 @@ class Robot
 			return Robot.new(data['sila'], data['zwinnosc'], data['dodatki'])
 		end
 	end
-	def what_json?
-		save = save_json
-		file = File.open(save, 'r')
-		return file.read
-		file.close
-	end
 end
 class RoboPtak < Robot # przychodzi w poziomie II
-	def initialize(skrzydła, nogi, nazwa,zdolność_ataku=10,zdolność_obrony=67)
+	def initialize(skrzydła, nogi, nazwa, życie=rand(80))
 		@dodatki = []
 		@sila = 901000
-		@zdolność_obrony = zdolność_obrony
-		@zdolność_ataku = zdolność_ataku
+		@życie = życie
 		@skrzydła = skrzydła
 		@nogi = nogi
 		@nazwa = nazwa
+		@zwinnosc = rand(900)
 	end
 	def atak 
 		silaw = rand(100)
@@ -129,17 +116,17 @@ class RoboPtak < Robot # przychodzi w poziomie II
 		niestety, stracił siłę o #{silaw*2}.
 		teraz ma #{@sila}."
 	end
-	def as_json(*options={})
+	def as_json(options={})
 		{
-			siła: @sila,
+			sila: @sila,
             zwinnosc: @zwinnosc,
             dodatki: @dodatki,
-            zdolność_ataku: @zdolność_ataku,
 			nazwa: @nazwa,
-			współna_siła: @@sila,
-			zdolność_obrony: @zdolność_obrony,
+			zwinnosc: @zwinnosc,
+			sila: @@sila,
 			skrzydła: @skrzydła,
-			nogi: @nogi
+			nogi: @nogi,
+			życie: @życie
 		}
 	end
 end
