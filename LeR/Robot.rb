@@ -346,14 +346,14 @@ r5 = Potworek.new(12,34,34,12,"Traktoe450")
 domyślne_roboty = ["#{r1}","#{r2}","#{r5}","#{r3}","#{r4}"]
 def zapisz_roboty_w_(gdzie, *roboty)
 	*roboty = roboty
-	roboty.each do |Robocik|
-		print "czy nasz robot '#{Robocik}' ma być w pliku #{gdzie}(wpisz tak, jeżeli tak)?"
+	roboty.each do |robocik|
+		print "czy nasz robot '#{robocik}' ma być w pliku #{gdzie}(wpisz tak, jeżeli tak)?"
 		tlubn = gets.chomp
 		if tlubn == 'tak'
-			puts "nasz robot '#{Robocik}' zostaje zapisywany..."
+			puts "nasz robot '#{robocik}' zostaje zapisywany..."
 			file = File.open(gdzie, 'w')
 			puts "dobra. otworzyliśmy plik."
-			file.write("#{Robocik}")
+			file.write("#{robocik}")
 			puts "OK.Robot został zapisywany."
 			file.close
 			puts "już gotowe."
