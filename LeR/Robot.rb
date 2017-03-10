@@ -100,28 +100,60 @@ class Robot
 	end
 end
 class RoboPtak < Robot # przychodzi w poziomie II
-	def initialize(skrzydła, nogi, nazwa, życie=rand(80))
+	def initialize(skrzydła, nogi, nazwa,sila=nil, życie=rand(100), zwinnosc=nil, zdolnoscAtaku=nil, zdolnoscObrony=nil)
 		@dodatki = []
-		@sila = 901000
-		@życie = życie
+		if sila != nil
+			@sila = sila
+		else
+			@sila = rand(90)
+		end
+		if zdolnoscAtaku != nil
+			sleep 2
+			puts "nie nic?"
+			@zdolnoscAtaku = zdolnoscAtaku
+		else
+			sleep 1
+			@zdolnoscAtaku = rand(100)
+		end
+		if zdolnoscObrony != nil
+			sleep 6
+			puts "nie nil!"
+			@zdolnoscObrony = zdolnoscObrony
+		else
+			sleep 5
+			@zdolnoscObrony = rand(600)
+		end
+		@życie = życie + 1
 		@skrzydła = skrzydła
 		@nogi = nogi
-		@nazwa = nazwa
-		@zwinnosc = rand(900)
+		@imię = nazwa
+		if zwinnosc != nil
+			@zwinnosc = zwinnosc
+		else
+			@zwinnosc = rand(80)
+		end
 	end
 	def atak 
-		silaw = rand(100)
+		silaw = rand(89)+1
 		@sila = @sila - (silaw * 2)
-		puts "brawo!! nasz #{@nazwa} grał z ptakiem z siłą #{silaw} wygrał nasz ptak #{@nazwa}!
+		puts "brawo!! nasz #{@imię} grał z ptakiem z siłą #{silaw} i wygrał nasz ptak #{@imię}!
 		niestety, stracił siłę o #{silaw*2}.
 		teraz ma #{@sila}."
+	end
+	def wykonajAtak (roboAtakowany, atak)
+		atak.obrazenia = ((rand(6)+1)* (1+((@sila/10.0+@zwinnosc/10.0)/2))).round
+		if atak.wynikAkcji == 2 #krytyczny sukces UWAGA! zmienić na korzytanie z modułu
+			atak.obrazenia *= 2 
+		end
+		roboAtakowany.życie -= atak.obrazenia
+		puts "UWAGA! #{roboAtakowany} doznał #{atak.obrazenia} obrażeń."
 	end
 	def as_json(options={})
 		{
 			sila: @sila,
             zwinnosc: @zwinnosc,
             dodatki: @dodatki,
-			nazwa: @nazwa,
+			nazwa: @imię,
 			zwinnosc: @zwinnosc,
 			sila: @@sila,
 			skrzydła: @skrzydła,
@@ -138,15 +170,13 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			mózg_dla_robota: 6790,
 			drewno: 8980
 		}
-	def initialize(zdolność_ataku=56,iśrubokrętów=45, igwoździ=56, imłotków=45, iśrubek=56, zdolność_obrony=89)
-		@nazwa = ["Lucas3","Ullo60","Eltra#{[67,1,2,142,2,34,67,475,76].sample}","R#{[5,6,7,8,9,10,11,12,13,14,151,16,15,17,nil,18,19,20].sample}","Robo#{[34,23,456,345,645,465]}","#{["Los#{[7,89,68,567,56].sample}","R56","Niezwykły Wynalazca#{[3,4,5,6,71,2,3,1,4,5,6,7,8,9].sample}"].sample}","Lucas#{[90,900,1,2,3,4,5,7,6,7,8,nil].sample}","Lucas67","Eltra 34","Pierd1","R1","R2","R3",'R4',"Pierd#{1,2,3,4,5,6,7,8,9,10,45,1797,nil}","Ullo70","Ullo#{[30,300,3,12,78,74,85,24,56,34,5].sample}"].sample
+	def initialize(iśrubokrętów, igwoździ, imłotków, iśrubek)
+		@nazwa = ["Lukas3","Lucas67","Eltra 34","Pier1","R1","R2","R3",'R4'].sample
 		@iśrubek = iśrubek # ilość śrubek
 		@imłotków = imłotków # ilość młotków
 		@igwoździ = igwoździ # ilość gwóździ
-		@zdolność_obrony = zdolność_obrony
 		@iśrubokrętów = iśrubokrętów # ilość śrubokrętów
 		@zwinnosc = [1,2,89,45,768,8990,565656,12, 89, 74555, 562].sample
-		@zdolność_ataku = zdolność_ataku
 		@sila = [nil, 0,34,67,nil,4,57,78, 10008320009900].sample
 		@dodatki = {}
 		@wynalazkir = []
@@ -160,27 +190,25 @@ class Wynalazca < Robot # przychodzi w poziomie V
 		end
 		@dodatki.merge (dodatk)
 	end
-	def as_json(*options={})
+	def as_json(options={})
 		{
 			nazwa: @nazwa,
 			dodatki: @dodatki,
 			zwinnosc: @zwinnosc,
-			siła: @sila,
-			zdolność_obrony: @zdolność_obrony,
+			siłaa: @sila,
 			ilość_śrubokrętów: @iśrubokrętów,
 			ilość_młotków: @imłotków,
 			ilość_gwoździ: @igwoździ,
-			zdolność_ataku: @zdolność_ataku,
 			ilość_śrub: @iśrubek,
 			wspólne_dodatki: @@dodatki,
 			wynalazki: @wynalazkir,
 			ilość_jeszcze_wspólnych_wynalazków: @@wynalazki
 		}
 	end
-	def wynalazek2
+	def wynalazek
 		puts "robot #{@nazwa} tworzy machinę..."
 		gets.chomp
-		wynalazek = ["robo-mutant-kot","giga-robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
+		wynalazek = ["robo-kot","robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
 		print "czy chcesz przyjąć od #{@nazwa} machinę: #{wynalazek}(wpisz tak, jeśli tak)?"
 		t = gets.chomp
 		if t == 'tak'
@@ -203,165 +231,5 @@ class Wynalazca < Robot # przychodzi w poziomie V
 			wspólne dodatki: #{@@dodatki},
 			wynalazki: #{@wynalazkir},
 			ilość jeszcze wspólnych wynalazków: #{@@wynalazki}"
-			end
-		end
-		def as_json(*options={})
-			{
-			dodatki: @dodatki,
-			zwinnosc: @zwinnosc,
-			sila: @sila,
-			ilość_śrubokrętów: @iśrubokrętów,
-			ilość_młotków: @imłotków,
-			ilość_gwoździ: @igwoździ,
-			ilość_śrub: @iśrubek,
-			wspólne_dodatki: @@dodatki,
-			wynalazki: @wynalazkir,
-			ilość_jeszcze_wspólnych_wynalazków: @@wynalazki
-		}
 	end
-	def wynalazek
-		puts "robot #{@nazwa} tworzy machinę..."
-		gets.chomp
-		wynalazek = ["robo-kot","robo-pies","robo-ninja","robo-smok","robo-miś do przytulania", "robo-łóżko","robo-urządzenie"].sample
-		print "czy chcesz przyjąć od #{@nazwa} machinę: #{wynalazek}(wpisz tak, jeśli tak)?"
-		t = gets.chomp
-		if t == 'tak'
-			@@wynalazki = @@wynalazki - 1
-			@wynalazkir = @wynalazkir.unshift(wynalazek)
-		end
-	end
-end
-class Lekarz < Robot # przychodzi w poziomi X.
-	@@punkty = 2947
-	@@nieosobiste_dodatki = {
-		robo_strzykawka: 78,
-		"robo-słuchawka do słuchania pulsowania śrubek" => 6909
-	}
-	def initialize(zdolność_obrony=10000,zdolność_ataku=10,mądrość=[9,12,23,34,100,20,19,18,17,16,1000,167].sample)
-		@mądrość = mądrość
-		@zdolność_ataku = zdolność_ataku
-		@zwinnosc = [45,34,45,163,66].sample
-		@siła = [12,35,636,7685,454512].sample
-		@dodatki = []
-		@zdolność_obrony = zdolność_obrony
-		@nazwa = ["Lucas50","Ullo60","Olli10","Robo40","Linno5","Etto30","Tikko20","Osa100"].sample
-	end
-	def self.co?
-		puts "robot #{@nazwa} ma punkty: #{@@punkty},
-		i ma dodatki: #{@@dodatki}"
-	end
-	def self.dd (new_dd={})
-		if new_dd.class == Hash
-			new_dd.each do |klucz, no_klucz|
-				print "czy chcesz mieć w #{@@dodatki}: {#{klucz}: #{no_klucz}}?"
-				tt = gets.chomp
-				if tt == 'tak'
-					@@nieosobiste_dodatki = @@nieosbiste_dodatki.merge({"#{klucz}" => no_klucz})
-				end
-			end
-		else
-			new_dd.each do |klucz|
-				print "czy chcesz mieć w #{@@dodatki}: {#{klucz}: #{no_klucz}}?"
-				tt = gets.chomp
-				if tt == 'tak'
-					@@nieosobiste_dodatki = @@nieosbiste_dodatki.merge({"#{klucz}" => no_klucz})
-				end
-			end
-		end
-	end
-	def self.dodatki
-		return @@nieosobiste_dodatki
-	end
-	def self.punkty
-		return @@punkty
-	end
-	def as_json(*options={})
-		{
-			nazwa: @nazwa,
-			siła: @siła,
-			zdolność_ataku: @zdolność_ataku
-			zwinność: @zwinnosc,
-			dodatki: @dodatki,
-			mądrość: @mądrość,
-			ilość_wspólnych_dodatków: @@nieosobiste_dodatki,
-			wspólne_punkty: @@punkty,
-			zdolność_obrony: @zdolność_obrony
-		}
-	end
-end
-class Potworek < Robot
-	@@dodatki = {
-		bat: 900,
-		robo_konik: 678,
-		mini_robo_wynalazca: 78890,
-		'mini_robo_pszczoły' => 689
-	}
-	def initalize(siła=34, zwinność=45, zdolność_ataku=67, zdolność_obrony=67, nazwa=nil)
-		@siła = siła
-		@dodatki = {}
-		@zdolność_ataku = zdolność_ataku
-		@zwinność = zwinność
-		@zdolność_obrony = zdolność_obrony
-		if @nazwa != nil
-			@nazwa = nazwa
-		else
-			print "wpisz nazwę dla roboto-potwora(jeżeli wpiszesz nic, nazwa potwora zostanie
-			 automatycznie wybrana):"
-			nowa_nazwa = gets.chomp
-			elsif nowa_nazwa != nil
-				@nazwa = nowa_nazwa
-			else
-				@nazwa = ["#{["Tictoc67",'Orto45'].sample}","Korto#{[1,2,3,4,5,6,7,8,9,10].sample}", "Korto", "R#{[2,1,3,34,45,678,900].sample}"].sample
-			end
-		end
-	end
-	def self.dodatki (*nowe_dodatki_selfowe)
-		*nowe_dodatki_selfowe.each do |dotatek|
-			print "czy chcesz mieć w #{@@dodatki} dodatek #{dodatek}(jeśli wpiszesz 'tak', #{dodatek} będzie w klasie Potworek)?"
-			self_tn = gets.chomp
-			if self_tn == 'tak'
-				puts "NoMethodError: undefined method `unshift' for {}:Hash
-				Did you mean?  shift
-        		from (irb):336
-        		from C:/Ruby336/bin/irb.cmd:19:in `<main>'"
-				gets.chomp
-				puts "Hę?"
-				gets.chomp
-				if *nowe_dodatki_selfowe.class == Hash
-					puts "Hash??! to popsuło mi plany."
-					@@dodatki = @@dodatki.merge(dodatek)
-				else
-					puts "To była zła metoda."
-					@@dodatki = @@dodatki.merge({"#{dodatek}" => rand(500897364)})
-				end
-			end
-		end
-	end
-end
-r1 = Robot.new(45,80,["ogienne rękawiczki"],"Orro7")
-r2 = RoboPtak.new(70,65,"Ullo70")
-r3 = Wynalazca.new(677,50,455,677)
-r4 = Lekarz.new(666)
-r5 = Potworek.new(12,34,34,12,"Traktoe450")
-domyślne_roboty = ["#{r1}","#{r2}","#{r5}","#{r3}","#{r4}"]
-def zapisz_roboty_w_(gdzie, *roboty)
-	*roboty = roboty
-	roboty.each do |robocik|
-		print "czy nasz robot '#{robocik}' ma być w pliku #{gdzie}(wpisz tak, jeżeli tak)?"
-		tlubn = gets.chomp
-		if tlubn == 'tak'
-			puts "nasz robot '#{robocik}' zostaje zapisywany..."
-			file = File.open(gdzie, 'w')
-			puts "dobra. otworzyliśmy plik."
-			file.write("#{robocik}")
-			puts "OK.Robot został zapisywany."
-			file.close
-			puts "już gotowe."
-		end
-	end
-end
-def wyświetl_coś_w_(gdzie)
-	file = File.open(gdzie, 'r')
-	return file.read
-	file.close
 end
