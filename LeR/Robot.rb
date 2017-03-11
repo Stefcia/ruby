@@ -123,7 +123,7 @@ class RoboPtak < Robot # przychodzi w poziomie II
 			sleep 5
 			@zdolnoscObrony = rand(600)
 		end
-		@życie = zycie + 1
+		@zycie = zycie + 1
 		@skrzydła = skrzydła
 		@nogi = nogi
 		@imię = nazwa
