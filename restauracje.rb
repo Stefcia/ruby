@@ -22,7 +22,7 @@ class Zjedzmy
 	@@stół_Wegetarian = {:ja => Time.now}
 	@@stół_Wegan = {}
 	@@stół_Roślinożerców = {"Bambi" => Time.now - rand(3000)}
-	@@stół_mięsożerców = {"Simba" => Time.now / 6}
+	@@stół_mięsożerców = {"Simba" => Time.now + 6}
 	@@Wszystkie_stoły = [@@stół_Wegetarian, @@stół_PCz, @@stół_mięsożerców, @@stół_Roślinożerców, @@stół_Wegan, @@stół_wszystkożerców]
 	def initialize(imię="Sztefi N.",typ_jedzenia=[:Wegetarianin, :Wegan, :PopularnyCzłowiek].sample)
 		puts "cześć! możemy, dodać trochę osób do list:
