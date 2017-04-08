@@ -100,7 +100,7 @@ class Robot
 	end
 end
 class RoboPtak < Robot # przychodzi w poziomie II
-	def initialize(skrzydła, nogi, nazwa,sila=nil, zycie=rand(999), zwinnosc=nil, zdolnoscAtaku=nil, zdolnoscObrony=nil)
+	def initialize(skrzydła, nogi, nazwa="R#{rand(4000)}",sila=nil, życie=rand(100), zwinnosc=nil, zdolnoscAtaku=nil, zdolnoscObrony=nil)
 		@dodatki = []
 		if sila != nil
 			@sila = sila
@@ -123,7 +123,7 @@ class RoboPtak < Robot # przychodzi w poziomie II
 			sleep 5
 			@zdolnoscObrony = rand(600)
 		end
-		@zycie = zycie + 1
+		@życie = życie + 1
 		@skrzydła = skrzydła
 		@nogi = nogi
 		@imię = nazwa
@@ -145,7 +145,7 @@ class RoboPtak < Robot # przychodzi w poziomie II
 		if atak.wynikAkcji == 2 #krytyczny sukces UWAGA! zmienić na korzytanie z modułu
 			atak.obrazenia *= 2 
 		end
-		roboAtakowany.zycie -= atak.obrazenia
+		roboAtakowany.życie -= atak.obrazenia
 		puts "UWAGA! #{roboAtakowany} doznał #{atak.obrazenia} obrażeń."
 	end
 	def as_json(options={})
@@ -158,7 +158,7 @@ class RoboPtak < Robot # przychodzi w poziomie II
 			sila: @@sila,
 			skrzydła: @skrzydła,
 			nogi: @nogi,
-			życie: @zycie
+			życie: @życie
 		}
 	end
 end
