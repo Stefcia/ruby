@@ -168,4 +168,11 @@ class Bar < Restauracja
 			@@Wszystkie_stoły = @@Wszystkie_stoły.push
 		end
 	end
+	def regulamin
+		puts "*********REGULAMIN BARU #{nazwa_baru}***************
+		I. Na terenie baru #{nazwa_baru} należy nie palić papierosów.
+		II. Nie wolno być pijanym, ani stać się pijanym i wyjść.
+		III. Na terenie baru należy być kulturalnym.
+		IV. "
+	end
 end
