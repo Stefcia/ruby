@@ -145,10 +145,11 @@ class Bar < Restauracja
 	@@stół_Roślinożerców = {"Bambi" => Time.now + rand(30)}
 	@@stół_mięsożerców = {"Simba" => Time.now + 6}
 	@@Wszystkie_stoły = [@@stół_Wegetarian, @@stół_PCz, @@stół_mięsożerców, @@stół_Roślinożerców, @@stół_Wegan, @@stół_wszystkożerców]
-	def initialize(nazwa_baru="pod siwym rakiem",imię="Sztefi N.",typ_jedzenia=[:Wegetarianin, :Wegan, :PopularnyCzłowiek].sample)
+	def initialize(zasady="I. ja tu żądzę!",nazwa_baru="pod siwym rakiem",imię="Sztefi N.",typ_jedzenia=[:Wegetarianin, :Wegan, :PopularnyCzłowiek].sample)
 		puts "cześć! możemy, dodać trochę osób do tych pustych stołow:
 		{}, {}, {}, {}, {}, {}, {}, lub od razu smakować najlepsze dania baru #{nazwa_baru}."
 		@imię = imię
+		@zasady = zasady
 		@nazwa_baru = nazwa_baru
 		case typ_jedzenia
 		when :Wegan
@@ -169,10 +170,18 @@ class Bar < Restauracja
 		end
 	end
 	def regulamin
-		puts "*********REGULAMIN BARU #{nazwa_baru}***************
-		I. Na terenie baru #{nazwa_baru} należy nie palić papierosów.
-		II. Nie wolno być pijanym, ani stać się pijanym i wyjść.
+		puts "*********REGULAMIN BARU #{@nazwa_baru}***************
+		I. Na TERENIE baru #{@nazwa_baru} należy NIE PALIĆ PAPIEROSÓW.
+		II. NIE WOLNO być PIJANYM, ani STAĆ się PIJANYM i WYJŚĆ.
 		III. Na terenie baru należy być kulturalnym.
-		IV. "
+		IV. Bar JEST BAREM #{@imię} i JAK się go/ją NIE SŁUCHA ma on PRAWO* wręczyć MANDAT.
+		V. Oto zasady** #{@imię}:
+		#{@zasady}.
+		!!!!!!UWAGA!!!!! SĄ KAMERY.
+
+
+		* - #{@imię} ma PRAWO do TEGO tylko WTEDY, gdy KTOŚ NIE PRZESTRZEGA ZASAD(patrz. V)
+		LUB NIE przetsrzega INNYCH PUNKTÓW REGULAMINU (może zostać aresztowany!).
+		** - Jeśli ZASADY są NIEZGODNE z PRAWEM ukaranie KOGOŚ ZA NIE PRZESTRZEGANIE ZASAD jest KARALNE ARESZTOWANIEM."
 	end
 end
