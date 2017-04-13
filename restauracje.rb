@@ -124,6 +124,9 @@ class Restauracja
 			end
 		end
 	end
+	def cennik
+		
+	end
 	def regulamin
 		puts "I. Nie wolno palić papierosów.
 		II. #{@nazwa_restauracji} jest miejscem publicznym.
@@ -145,7 +148,7 @@ class Bar < Restauracja
 	@@stół_Roślinożerców = {"Bambi" => Time.now + rand(30)}
 	@@stół_mięsożerców = {"Simba" => Time.now + 6}
 	@@Wszystkie_stoły = [@@stół_Wegetarian, @@stół_PCz, @@stół_mięsożerców, @@stół_Roślinożerców, @@stół_Wegan, @@stół_wszystkożerców]
-	def initialize(zasady="I. ja tu żądzę!",nazwa_baru="pod siwym rakiem",imię="Sztefi N.",typ_jedzenia=[:Wegetarianin, :Wegan, :PopularnyCzłowiek].sample)
+	def initialize(zasady="I. ja tu żądzę!",nazwa_baru="pod drewnianym staruszkiem",imię="Sztefi N.",typ_jedzenia=[:Wegetarianin, :Wegan, :PopularnyCzłowiek].sample)
 		puts "cześć! możemy, dodać trochę osób do tych pustych stołow:
 		{}, {}, {}, {}, {}, {}, {}, lub od razu smakować najlepsze dania baru #{nazwa_baru}."
 		@imię = imię
