@@ -10,7 +10,7 @@ def methodne(mim=nil)
 end
 puts "gra polega i ma reguły(rady):
 1.wypisujesz skróty - najkrócej,
-2.po wyłączeniu gry wszystko zaczyna się od nowa i 
+2.po wyłączeniu gry wszystko zaczyna się od nowa, 
 3.broni, którą używałeś i wyczerpałeś jest aktywna według listy:"
 lista = {
 	laser: 5,
@@ -68,17 +68,21 @@ while true
 	end
 		if decydowanie == 'start'
 		puts "ok. start!!!"
+		sleep 3
+		system ('cls')
 		puts "zaczynamy!"
+		sleep 3
+		system ('cls')
 		puts "biegniesz w nieznanym świecie..."
 		print "widzisz na polance, która jest niedaleko, skrzynię.
 		jeśli chcesz ją zostawić, napisz r.
 		jeżeli jednak nie chcesz jej nie zostawiać, napisz coś innego:"
 		ruszam = gets.chomp
 		if ruszam == 'r'
-			puts "ok. przechodzisz obok polanki."
-			mam = {}
+			puts "słusznie. przechodzisz obok polanki."
+			$mam = {}
 		else
-			mam = {
+			$mam = {
 				:piesc => 55,
 			}
 			niespodzianka = ['łuk i strzały', :laser, :miecz, :dżida, :karabin].sample
@@ -86,22 +90,22 @@ while true
 			if niespodzianka == :laser
 				laser = 5
 				piesc = 55
-				mam = {laser: "#{laser}"}.merge (mam)
+				$mam = {laser: "#{laser}"}.merge ($mam)
 			end
 			if niespodzianka == :miecz
 				miecz = 6
 				piesc = 55
-				mam = {miecz: "#{miecz}"}.merge (mam)
+				$mam = {miecz: "#{miecz}"}.merge ($mam)
 			end
 			if niespodzianka == 'łuk i strzały'
 				strzaly = 100
 				piesc = 55
-				mam = {strzały: "#{strzaly}", 'łuk i strzały' => 'łuk zostaje; strzały:100'}.merge (mam)
+				$mam = {strzały: "#{strzaly}", 'łuk i strzały' => 'łuk zostaje; strzały:100'}.merge ($mam)
 			end
 			if niespodzianka == :dżida
 				dzida = 90
 				piesc = 55
-				mam = {:dżida => "#{dzida}"}.merge (mam)
+				$mam = {:dżida => "#{dzida}"}.merge ($mam)
 			end
 		end
 		while true
@@ -120,7 +124,7 @@ while true
 					print "aa! wychodzi normalny robot z tarczą! 
 					wpisz, jaką broń użyjesz:"
 					broń = gets.chomp
-					if mam.key? (:"#{broń}")
+					if $mam.key? (:"#{broń}")
 					else
 						puts "pięść to 'p', laser 'l', miecz 'mm' oraz strzały z łuku: 'strz'"
 						print "napisz skrót(lub głupotę,jeżeli chcesz wrócić:"
@@ -132,8 +136,8 @@ while true
 							when  
 								
 							end
-							mam.each do |klucz, wytrzymałość| 
-								if mam.key?(:"#{broń}")
+							$mam.each do |klucz, wytrzymałość| 
+								if $mam.key?(:"#{broń}")
 									puts "możemy to użyć!"
 									case broń
 									when condition
@@ -156,3 +160,4 @@ while true
 		system ('cls')
 	end
 end
+puts "koniec PRZYGODY. naciśnij Enter."
