@@ -38,7 +38,7 @@ while true
 		"przerwa" => :przerwij_pracę
 		}
 	tablica2 = {"8" => nil}.merge (tablica)
-	tablica.each do |klucz, zamek|
+	tablica2.each do |klucz, zamek|
 		klucz = $klucz
 		if liczba == klucz
 			puts "aa... wybrałeś #{klucz}.
