@@ -124,8 +124,15 @@ class Restauracja
 			end
 		end
 	end
-	def cennik
-		
+	def self.cennik (mam)
+		while true
+			case mam.class
+			when Array
+				puts "OK. masz #{mam}#{["$", :zł].sample}"
+			else
+				puts "Hę?"
+			end
+		end
 	end
 	def regulamin
 		puts "I. Nie wolno palić papierosów.
@@ -134,7 +141,7 @@ class Restauracja
 		UWAGA! W terenie restauracjii właściciel restauracji, #{@imię}, ma prawo* wręczyć mandat lub zakaz wchodzenia na teren restauracjii(co też każe mandatem).
 
 
-		* - #{@imię} ma PRAWO wręczyć MANDAT TYLKO WTEDY, gdy KTOŚ ZACHOWUJE się NIEKULTURALNI LUB nie PRZESTRZEGA ZASAD REGULAMINU(^)."
+		* - #{@imię} ma PRAWO wręczyć MANDAT TYLKO WTEDY, gdy KTOŚ ZACHOWUJE się NIEKULTURALNIE LUB nie PRZESTRZEGA ZASAD REGULAMINU(^)."
 	end
 	def self.odświerz
 		@@Wszystkie_stoły = [@@stół_Wegetarian, @@stół_Roślinożerców, @@stół_PCz, @@stół_Wegan, @@stół_mięsożerców, @@stół_wszystkożerców]
@@ -143,7 +150,7 @@ end
 class Bar < Restauracja
 	@@stół_wszystkożerców = {"dzik" => Time.now + 1}
 	@@stół_PCz = {:filozof => Time.now - (1000 * (199 * (1000 * 100)))}
-	@@stół_Wegetarian = {:ja => Time.now}
+	@@stół_Wegetarian = {:komp => Time.now}
 	@@stół_Wegan = {:filozof2 => Time.now - (200 * (1000 * (100 * 1000)))}
 	@@stół_Roślinożerców = {"Bambi" => Time.now + rand(30)}
 	@@stół_mięsożerców = {"Simba" => Time.now + 6}
