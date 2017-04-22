@@ -12,13 +12,14 @@ Gdy wpiszesz na przerwie 'gdzie' gra podaje gdzie jesteś, co przeszedłeś.
 Część gry to próbowanie różnych poleceń i patrzenie, co się dzieje.
 Jeśli chcesz więcej instrukcji, na przerwie wpisz 'pomoc'."
 while true
+	sleep 2
 	print "zaczynamy!
 	zaczyna gracz nr 1 - lub ten, który jako jedyny gra.
 	gracza nr 1 będę nazywać Jeden.
 	A gracza nr 2(tego, który będzie grać później) - Dwa.
 	Jeden ma wybrać otoczenie, z tego(wpisz liczby):
 	1). góry, 
-	2). morze, 
+	2). morza, 
 	3). niziny, 
 	4). wyżyny, 
 	5). wyspy, 
@@ -27,7 +28,7 @@ while true
 	liczba = gets.chomp
 	tablica = {
 		"1" => 'góry',
-		"2" => 'morze',
+		"2" => 'morza',
 		"3" =>'niziny',
 		"4" => 'wyżyny',
 		"5" => 'wyspy',
@@ -36,25 +37,26 @@ while true
 		"8" => nil,
 		"przerwa" => :przerwij_pracę
 		}
-	tablica = {"8" => nil}.merge (tablica)
+	tablica2 = {"8" => nil}.merge (tablica)
 	tablica.each do |klucz, zamek|
 		klucz = $klucz
 		if liczba == klucz
 			puts "aa... wybrałeś #{klucz}.
 			#{klucz} oznacza #{zamek}."
+			break
 		else
 			puts "nie wybrałeś #{klucz}??"
-			if tablica.include?(klucz) 
-				#include? = zawiera
-				break
-			else
-				puts "źle!!!!!!! zaczynamy od nowa."
-				print "najpierw jeszcze napisz,jak mam do ciebie mówić?:"
-				imię1 = gets.chomp
-				print "No wreszcie mogę mówić do ciebie jak chcesz.
-				(Czyli będziesz nazywany przezemnie #{imię1}.)"
-			end
 		end
+	end
+	if tablica.include?(klucz)
+		#include? = zawiera
+		break
+	else
+		puts "źle!!!!!!! zaczynamy od nowa."
+		print "najpierw jeszcze napisz,jak mam do ciebie mówić?:"
+		imię1 = gets.chomp
+		print "No wreszcie mogę mówić do ciebie jak chcesz.
+		(Czyli będziesz nazywany przezemnie #{imię1}.)"
 	end
 end
 while true
@@ -64,7 +66,8 @@ while true
 		break
 	end
 	puts "Pora wypróbować nasze hm... Jak to powiedzieć..."
-	sleep 10
+	sleep 20
+	system ('cls')
 	print "Już wiem!Definicje. 
 	Czyli zaczynamy!(Wybierz, Jeden, coś z tego: 'informacje','instrukcja':)"
 	przerwisko = gets.chomp
@@ -113,7 +116,6 @@ while true
 			break
 		else
 			puts "#{przerwisko}?????????!"
-			break
 		end	
 	end
 end
