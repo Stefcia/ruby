@@ -24,7 +24,8 @@ while true
 	4). wyżyny, 
 	5). wyspy, 
 	6). GnM(góry nad morzem),
-	7). losowe." 
+	7). losowe,
+	8). miasto." 
 	liczba = gets.chomp
 	tablica = {
 		"1" => 'góry',
@@ -34,21 +35,21 @@ while true
 		"5" => 'wyspy',
 		"6" => 'góry nad morzem',
 		"7" => 'losowe',
-		"8" => nil,
+		"8" => 'miasto',
 		"przerwa" => :przerwij_pracę
 		}
-	tablica2 = {"8" => nil}.merge (tablica)
+	tablica2 = {"8" => 'miasto'}.merge (tablica)
 	tablica2.each do |klucz, zamek|
-		klucz = $klucz
-		if liczba == klucz
-			puts "aa... wybrałeś #{klucz}.
-			#{klucz} oznacza #{zamek}."
+		$klucz = klucz
+		if liczba == $klucz
+			puts "aa... wybrałeś #{$klucz}.
+			#{$klucz} oznacza #{zamek}."
 			break
 		else
-			puts "nie wybrałeś #{klucz}??"
+			puts "nie wybrałeś #{$klucz}??"
 		end
 	end
-	if tablica.include?(klucz)
+	if tablica.include?("#{$klucz}")
 		#include? = zawiera
 		break
 	else
