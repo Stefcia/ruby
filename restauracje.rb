@@ -128,7 +128,7 @@ class Restauracja
 		while true
 			case mam.class
 			when Array
-				puts "OK. masz #{mam}#{["$", :zł].sample}"
+				puts "OK. masz #{mam}#{["$", :zł, "euro"].sample}"
 			else
 				puts "Hę?"
 			end
