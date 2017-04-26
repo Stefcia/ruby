@@ -67,11 +67,16 @@ class RoboWalka
 			when WynikAkcji::PORAZKA
 				puts "#{roboAtakujacy} nie jest w stanie skutecznie zagrozić przeciwnikowi..."
 			when WynikAkcji::KRYTYCZNA_PORAZKA
-				puts "KRYTYCZNA PORAŻKA! #{roboAtakujacy} potyka się o własny kabel podczas ataku. Bardzo źle... dla niego."
-				sleep 1
+				rodzaj = ["potyka się o własny kabel podczas ataku", "bije przeciwnika tak mocno, że #{roboBroniacy} nie umie odeprzeć ataku, więc atakuje i robi mu usterkę", "atakuje, ale #{roboBroniacy} jeszcze nie skończył ataku..", "bije się, ale tak, że wypada mu bateryjka", "jest uszkodzony, bo nagle pewien kabel się rospada"].sample
+				if rodzaj == "bije przeciwnika tak mocno, że #{roboBroniacy} nie umie odeprzeć ataku, więc atakuje i robi mu usterkę"
+					puts "ATAK KRYTYCZNY! #{roboAtakujacy} #{rodzaj}. Bardzo źle... dla niego."
+					sleep 1
+				else
+					puts "!!!ATAK KRYTYCZNY!!! #{roboAtakujacy} #{rodzaj}.Nic bardzo złego, ale nie jest dobrze."
+				end
 				roboBroniacy.wykonajAtak(roboAtakujacy, Atak.new(roboAtakujacy.zdolnoscAtaku, rand(5)+1))
 			else
-				puts "Dzieje się coś dziwnego: {#atak.wynikAkcji}"
+				puts "Dzieje się coś dziwnego: #{atak.wynikAkcji}"
 		end
 		
 	end
