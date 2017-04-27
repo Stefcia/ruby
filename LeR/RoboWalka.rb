@@ -32,8 +32,14 @@ class RoboWalka
 				puts "#{roboBroniacy} nie jest w stanie się obronić..."
 				sleep 1
 			when WynikAkcji::KRYTYCZNA_PORAZKA
-				puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} upada na własną antenkę podczas próby odparcia ataku. Bardzo źle... to mocno ułatwi sprawę przeciwnikowi."
-				sleep 1
+				rodzaj = ["potyka się o własną antenkę podczas obrony", "broni się robociałem; gdy się zasłania swoim robopancerzem, pęka i pęka mu kabelek(na szczęście niezbyt potrzebny)..", "przeciwnik bije go, ale on urzywa robolaseru, który odbija się od oczu #{roboAtakujacy} i uszkadza go.."].sample
+				if rodzaj == "broni się robociałem; gdy się zasłania swoim robopancerzem, pęka i pęka mu kabelek(na szczęście niezbyt potrzebny).."
+					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Bardzo źle... dla niego."
+					sleep 1
+				else
+					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Nie bardzo źle... Dla niego."
+					sleep 1
+				end
 			else
 				puts "Dzieje się coś dziwnego: {#atak.wynikAkcji}"
 		end
