@@ -37,7 +37,7 @@ class RoboWalka
 					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Bardzo źle... dla niego."
 					sleep 1
 				else
-					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Nie bardzo źle... Dla niego."
+					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Nie bardzo źle, ale troszkę źle... Dla niego."
 					sleep 1
 				end
 			else
@@ -162,4 +162,3 @@ end
 class Obrona < Akcja
 
 end
-
