@@ -331,7 +331,7 @@ sleep 2
 puts "Atak zrobiony!"
 class Obrona < Akcja
 end
-sleep 2
+sleep 1
 puts "Obrona też!"
 r1 = Robot.new("Fu'Fuja", 90, 30, 60, 20, 60)
 r2 = RoboPtak.new(70,65)
@@ -347,5 +347,9 @@ puts "Fiuu! Praca zakończona."
 while true
 	puts "spójrz na linijkę zaczynającą się 'Gotowe!' i linijkę pod."
 	sleep 2
-	print "czy chcesz dorobić robota(bądź roboty) do []? czy wolisz powalczyć"
+	puts "czy chcesz dorobić robota(bądź roboty) do []?"
+	sleep 5
+	puts "czy wolisz 'powalczyć' robotami?
+	napisz 1, jeśli chcesz dorobić robota, a jeśli nie, napisz nic lub poprostu napisz coś innego:"
+	c1 = gets.chomp
 end
