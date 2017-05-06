@@ -1,6 +1,6 @@
 require 'json'
 require 'tempfile'
-puts "Witam w świecie robotów! "
+puts "Witam w świecie robotów! Stworzymy teraz bazę robotów!"
 class Robot 
 	attr_reader :zdolnoscAtaku, :zdolnoscObrony, :imie
 	def initialize(imie, zycie, sila, zwinnosc, zdolnoscAtaku, zdolnoscObrony)
@@ -99,6 +99,8 @@ class Robot
 		end
 	end
 end
+sleep 1
+puts "dobra. Teraz skończymy tworzenie bazy robotów!"
 class RoboPtak < Robot # przychodzi w poziomie II
 	def initialize(skrzydła, nogi, nazwa="R#{rand(4000)}",sila=nil, życie=80, zwinnosc=nil, zdolnoscAtaku=nil, zdolnoscObrony=nil)
 		@dodatki = []
@@ -162,6 +164,8 @@ class RoboPtak < Robot # przychodzi w poziomie II
 		}
 	end
 end
+sleep 3
+puts "gotowe! teraz stworzymy 'instykt' walki!"
 class RoboWalka
 
 	#attr_accessor :roboWyzywajacy, :roboAkceptujacy 
@@ -178,26 +182,26 @@ class RoboWalka
 		puts "#{roboBroniacy} zwiera wszystkie śrubki do obrony..."
 		sleep 2
 		puts "...#{obrona.los}..."
-		sleep 1
+		sleep 4
 		case obrona.wynikAkcji 
 			when WynikAkcji::KRYTYCZNY_SUKCES 
 				puts "OBRONA KRYTYCZNA! #{roboBroniacy} broni się jak robo-mistrz! Nie tylko odpiera atak, ale sam atakuje... #{roboAtakujacy} jest tak zaskoczony, że aż zaiskrzyły mu obwody i nie jest w stanie nic zrobić!" 
-				sleep 1
+				sleep 3
 				roboBroniacy.wykonajAtak(roboAtakujacy, Atak.new(roboAtakujacy.zdolnoscAtaku, rand(5)+1))
 			when WynikAkcji::SUKCES
 				puts "UDANA OBRONA! #{roboBroniacy} skutecznie się broni."
-				sleep 1
+				sleep 3
 			when WynikAkcji::PORAZKA
 				puts "#{roboBroniacy} nie jest w stanie się obronić..."
-				sleep 1
+				sleep 2
 			when WynikAkcji::KRYTYCZNA_PORAZKA
 				rodzaj = ["potyka się o własną antenkę podczas obrony", "broni się robociałem; gdy się zasłania swoim robopancerzem, pęka i pęka mu kabelek(na szczęście niezbyt potrzebny)..", "przeciwnik bije go, ale on urzywa robolaseru, który odbija się od oczu #{roboAtakujacy} i uszkadza go.."].sample
 				if rodzaj == "broni się robociałem; gdy się zasłania swoim robopancerzem, pęka i pęka mu kabelek(na szczęście niezbyt potrzebny).."
 					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Bardzo źle... dla niego."
-					sleep 1
+					sleep 2
 				else
 					puts "KRYTYCZNIE ZŁA OBRONA! #{roboBroniacy} #{rodzaj}. Nie bardzo źle, ale troszkę źle... Dla niego."
-					sleep 1
+					sleep 5
 				end
 			else
 				puts "Dzieje się coś dziwnego: {#atak.wynikAkcji}"
@@ -209,19 +213,19 @@ class RoboWalka
 	def atak(roboAtakujacy, roboBroniacy)
 		atak = Atak.new(roboAtakujacy.zdolnoscAtaku)
 		puts "#{roboAtakujacy} atakuje ile sił w bateryjce..."
-		sleep 1
+		sleep 3
 		puts "..."
-		sleep 1
+		sleep 4
 		puts "#...#{atak.los}..."
-		sleep 1
+		sleep 3
 		case atak.wynikAkcji 
 			when WynikAkcji::KRYTYCZNY_SUKCES 
 				puts "ATAK KRYTYCZNY! #{roboBroniacy} nie jest w stanie się bronić..." 
-				sleep 1
+				sleep 3
 				roboAtakujacy.wykonajAtak(roboBroniacy, atak)
 			when WynikAkcji::SUKCES
 				puts "UDANY ATAK... ale #{roboBroniacy} przystępuje do obrony..."
-				sleep 1
+				sleep 3
 				obrona = obrona(roboBroniacy, roboAtakujacy)
 				case obrona.wynikAkcji
 					when WynikAkcji::PORAZKA
@@ -235,7 +239,7 @@ class RoboWalka
 				rodzaj = ["potyka się o własny kabel podczas ataku", "bije przeciwnika tak mocno, że #{roboBroniacy} nie umie odeprzeć ataku, więc atakuje i robi mu usterkę", "atakuje, ale #{roboBroniacy} jeszcze nie skończył ataku..", "bije się, ale tak, że wypada mu bateryjka", "jest uszkodzony, bo nagle pewien kabel się rospada"].sample
 				if rodzaj == "bije przeciwnika tak mocno, że #{roboBroniacy} nie umie odeprzeć ataku, więc atakuje i robi mu usterkę"
 					puts "ATAK KRYTYCZNY! #{roboAtakujacy} #{rodzaj}. Bardzo źle... dla niego."
-					sleep 1
+					sleep 3
 				else
 					puts "!!!ATAK KRYTYCZNY!!! #{roboAtakujacy} #{rodzaj}.Nic bardzo złego, ale nie jest dobrze."
 				end
@@ -266,7 +270,7 @@ class RoboWalka
 	
 	def walczmy
 		akcjaWalki = 1
-		sleep 1
+		sleep 2
 		until sprawdzCzyKoniec?
 			puts " ***************** Akcja #{akcjaWalki}. ***************** \n#{roboWyzywajacy} ma #{roboWyzywajacy.zycie} punktów życia.\n#{roboAkceptujacy} ma #{roboAkceptujacy.zycie} punktów życia."
 			if akcjaWalki.odd?
@@ -278,12 +282,18 @@ class RoboWalka
 		end
 	end
 end
+sleep 2
+puts "to teraz, właśnie teraz stworzyliśmy 'szkielet' walki!"
+sleep 10
+system ('cls')
 module WynikAkcji
 	KRYTYCZNY_SUKCES = 2
 	SUKCES = 1
 	KRYTYCZNA_PORAZKA = -2
 	PORAZKA = -1
 end
+puts "A teraz 'pojemnik' na akcje walki!"
+sleep 1
 class Akcja include WynikAkcji
 	attr_reader :wynikAkcji, :los
 	
@@ -310,11 +320,19 @@ class Akcja include WynikAkcji
 		end
 	end
 end
+sleep 6
+puts "A teraz stworzyliśmy teraz 'serce' każdej akcjii!"
+sleep 8
+system ('cls')
 class Atak < Akcja
 	attr_accessor :obrazenia
 end
+sleep 2
+puts "Atak zrobiony!"
 class Obrona < Akcja
 end
+sleep 2
+puts "Obrona też!"
 r1 = Robot.new("Fu'Fuja", 90, 30, 60, 20, 60)
 r2 = RoboPtak.new(70,65)
 r3 = Robot.new("O'Fifajka", 90, 30, 50, 90, 50)
@@ -322,6 +340,10 @@ r4 = Robot.new("O'Fibajka")
 domyślne_roboty = ["#{r1}","#{r2}","#{r5}","#{r3}","#{r4}"]
 roboty = []
 stworzone_roboty = [domyślne_roboty, roboty]
+puts "Gotowe! A oto twe roboty:
+#{stworzone_roboty}."
+sleep 8
+puts "Fiuu! Praca zakończona."
 while true
-	
+	print ""
 end
