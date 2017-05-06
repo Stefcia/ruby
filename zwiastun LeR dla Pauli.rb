@@ -345,5 +345,7 @@ puts "Gotowe! A oto twe roboty:
 sleep 8
 puts "Fiuu! Praca zakończona."
 while true
-	print ""
+	puts "spójrz na linijkę zaczynającą się 'Gotowe!' i linijkę pod."
+	sleep 2
+	print "czy chcesz dorobić robota(bądź roboty) do []? czy wolisz powalczyć"
 end
