@@ -376,6 +376,6 @@ while true
 		puts "dorobimy..."
 		sleep 12
 		puts "dorobimy robota dla walki LeR!!!"
-		$najważniejsze = 
+		$najważniejsze = "dorobimy robocika!"
 	end
 end
