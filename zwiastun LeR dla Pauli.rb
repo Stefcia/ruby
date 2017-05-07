@@ -350,6 +350,32 @@ while true
 	puts "czy chcesz dorobić robota(bądź roboty) do []?"
 	sleep 5
 	puts "czy wolisz 'powalczyć' robotami?
-	napisz 1, jeśli chcesz dorobić robota, a jeśli nie, napisz nic lub poprostu napisz coś innego:"
+	napisz 1, jeśli chcesz dorobić robota, a jeśli nie, napisz nic(wtedy wyjdziesz z gry) lub poprostu napisz coś innego:"
+	sleep 2
 	c1 = gets.chomp
+	sleep 29 / 2
+	system ('cls')
+	sleep1
+	if c1 != 1
+		if c1 == nil
+			$najważniejsze = "break"
+		else
+			puts "i teraz nadszedł czas na..."
+			sleep 3
+			puts "na..."
+			sleep 10
+			system ('cls')
+			puts "RoboWalkę LeR*!"
+			sleep 7
+			puts "* - treningową;)"
+			sleep 10
+			system ('cls')
+			$najważniejsze = "Walka"
+		end			
+	else
+		puts "dorobimy..."
+		sleep 12
+		puts "dorobimy robota dla walki LeR!!!"
+		$najważniejsze = 
+	end
 end
