@@ -8,8 +8,8 @@ dr = RoboPtak.new(3,4,"Gge67")
 robo = Robot.new("Zżylla5", 79, 23, 9, 55, 60)
 średni_r = Robot.new("Robo średniak.R#{rand(100)}", 50, 10, 7, 35, 50)
 fu = Robot.new("Marko Fu #{rand(100)+rand(399)-(rand(10)+1)}}",70, 90, 50, 60, 40)
-allen = RoboPtak.new(50, 60, "Mark Allen#{rand(500)-rand(4)+10}", 70, 50, 90, 40, 60)
 sullivan = Robot.new("O'Sullivan 6", 70, 80, 90, 50, 100)
+allen = RoboPtak.new(50, 60, "Mark Allen#{rand(500)-rand(4)+10}", 70, 50, 90, 40, 60)
 day = RoboPtak.new(30, 70, "Day90", 80, 50, 50, 70, 50)
 super_robo = Robot.new("Eerno3000", 99, 80, 70, 80, 60)
 final1 = [
@@ -34,11 +34,10 @@ def grajmy(lista)
 		if elementTablicy.class == Array
 			w1 = RoboWalka.new(elementTablicy.first, elementTablicy.last)
 			w1.walczmy
-		else
 		elsif elementTablicy.class == RoboWalka
 			elementTablicy.walczmy
 		end
-				print "CZY CHCESZ ZOBACZYĆ RoboWALKĘ JESZCZE RAZ(inną)?"
+		print "CZY CHCESZ ZOBACZYĆ RoboWALKĘ JESZCZE RAZ(inną)?"
 		tln = gets.chomp
 		if tln == 'nie'
 			break
