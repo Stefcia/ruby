@@ -1,7 +1,7 @@
 require 'C:\Users\admin\Documents\ruby\LeR\Robot.rb'
 require 'C:\Users\admin\Documents\ruby\LeR\Robowalka.rb'
 r1 = Robot.new(:r4, 55, 10,10, 50, 25)
-r2 = Robot.new("r#{[:s. "t", 5].object_id}", 77, 5,5, 40, 45)
+r2 = Robot.new("r#{[:s, "t", 5].object_id}", 77, 5,5, 40, 45)
 super_r = Robot.new("Eerno1",67, 19, 10, 55, 70)
 bubu_robo = Robot.new("Eerno2",67, 6, 5, 50, 50)
 dr = RoboPtak.new(3,4,"Gge67")
@@ -17,7 +17,7 @@ final = {
 	średni_r => fu,
 	dr => sullivan,
 	super_r => r2,
-	bubu_robo => r1,
+	bubu_robo => super_robo,
 	day => robo
 }
 def grajmy(lista)
@@ -29,6 +29,8 @@ def grajmy(lista)
 		tln = gets.chomp
 		if tln == 'nie'
 			break
+		else
+			system ('cls')
 		end
 	end
 end
