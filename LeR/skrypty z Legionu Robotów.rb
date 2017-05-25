@@ -21,12 +21,12 @@ final1 = [
 	[day , robo]
 ]
 final2 = [
-	RoboWalka.new(allen,r1),
-	RoboWalka.new(średni_r, fu),
-	RoboWalka.new(dr , sullivan),
-	RoboWalka.new(super_r , r2),
-	RoboWalka.new(bubu_robo , super_robo),
-	RoboWalka.new(day , robo)
+	RoboWalka.new(robo, fu),
+	RoboWalka.new(super_r, super_robo),
+	RoboWalka.new(allen, sullivan),
+	RoboWalka.new(day, średni_r),
+	RoboWalka.new(dr, r2),
+	RoboWalka.new(r1, bubu_robo)
 ]
 
 def grajmy(lista)
@@ -39,10 +39,11 @@ def grajmy(lista)
 		end
 		print "CZY CHCESZ ZOBACZYĆ RoboWALKĘ JESZCZE RAZ(inną)?"
 		tln = gets.chomp
-		if tln == 'nie'
-			break
-		else
+		if tln == 'tak'
+			sleep 1
 			system ('cls')
+		else
+			break
 		end
 	end
 end
