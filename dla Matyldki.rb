@@ -24,6 +24,13 @@ kontoW = {
 	:grupa => "KB",
 	:nazwa_użytkownika => "Wiktuś"
 }
-kontoW.each do |nazwa, dane|
 
+#def sprawdź = rozwiązanie
+def sprawdź
+	
+end
+kontoW.each do |nazwa, dane|
+	if nazwa == dane
+		
+	end
 end
