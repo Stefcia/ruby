@@ -13,7 +13,7 @@ class Robot
 		puts "robot ma siłę: #{sila}, zwinność: #{zwinnosc}, życie: #{zycie}, zdolnoscAtaku: #{zdolnoscAtaku}, zdolnoscObrony #{zdolnoscObrony} a dodatki ma: #{@dodatki}."
 	end	
 	def to_s
-		"ROBO_#{imie}."
+		"ROBO_#{imie}"
 	end
 	def opis
 		"To jest robot #{to_s}. Jego sila to #{@sila} a zwinnosc to #{@zwinnosc} i ma dodatki: #{dodatki}."
@@ -126,12 +126,15 @@ class RoboPtak < Robot # przychodzi w poziomie II
 		@zycie = zycie + 1
 		@skrzydła = skrzydła
 		@nogi = nogi
-		@imię = nazwa
+		@imie = nazwa
 		if zwinnosc != nil
 			@zwinnosc = zwinnosc
 		else
 			@zwinnosc = rand(80)
 		end
+	end
+	def to_s
+		puts "Robo-Bird_#{@imie}"
 	end
 	def atak 
 		silaw = rand(89)+1
