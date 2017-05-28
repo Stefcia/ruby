@@ -5,7 +5,11 @@ system ('cls')
 zabawy = [:Kolki_Babolki, :restauracje_split,:notesik, :zgadywanki, :rozmówki]
 zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :notesik]
 zzabawy2 = [:Kolki_Babolki, :zgadywanki]
-sleep 5
+sleep 2
+def 
+	
+end
+sleep 1
 def notesik(ilośćZakręceń)
 	puts "zacznij 'piękne' notatki:"
 	i = 0
@@ -26,6 +30,14 @@ def notesik(ilośćZakręceń)
 	notatki.each do |n2|
 		puts n2
 	end
+end
+def restauracje_split
+	print "Witamy! Zamów coś! zamówienia wypisz po przecinku."
+	sleep 7
+	zamówienie = gets.chomp
+	sleep 2
+	zamówienie = zamówienie.split(",")
+	return "dziękujemy za twoje zakupy:#{zamówienie}."
 end
 sleep 1
 kontoM = {
