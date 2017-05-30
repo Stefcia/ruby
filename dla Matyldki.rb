@@ -6,23 +6,47 @@ zabawy = [:Kolki_Babolki, :restauracje_split,:notesik, :zgadywanki, :rozmówki]
 zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :notesik]
 zzabawy2 = [:Kolki_Babolki, :zgadywanki]
 sleep 2
-def 
-	
+$i = 0
+def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca)
+	puts "zacznijmy rozmówki!" 
+	rozmówki = [
+		[:"#{zaczynajacy}", "cześć!"]
+	]
+	while true
+		rozmówki.each do |metadane|
+			$i = $i+1
+			if $i.odd? == true
+			 	puts "#{metadane.first} mówi #{metadane.last}."
+				print "co odpowie #{rozmowca}?"
+				odpowiedź = gets.chomp
+				rozmówki = rozmówki.push([:"#{rozmowca}", "#{odpowiedź}"])
+			end 
+		end
+		if ilośćZakręceń == 0
+			break
+		else
+			ilośćZakręceń = ilośćZakręceń - 1
+		end
+	end
+	$i = 0
+	puts "oto rozmowa #{zaczynajacy} i #{rozmowca}:"
+	rozmówki.each do |metadane|
+		puts "- #{metadane.last} - powiedział #{metadane.first}."
+	end
 end
 sleep 1
 def notesik(ilośćZakręceń)
 	puts "zacznij 'piękne' notatki:"
-	i = 0
 	notatki = ["oto piękna notatka:"]
 	while true
 		sleep 3
 		n = gets.chomp
 		notatki = notatki.push "#{n}"
 		sleep 1
-		if i == ilośćZakręceń
+		if $i == ilośćZakręceń
 			break
 		else
-			i = i+1
+			$i = $i+1
 			puts "jeszcze nie kończymy, kontynuuj:"
 		end
 	end
@@ -30,6 +54,9 @@ def notesik(ilośćZakręceń)
 	notatki.each do |n2|
 		puts n2
 	end
+	$i = 0
+	sleep 1
+	return notatki
 end
 def restauracje_split
 	print "Witamy! Zamów coś! zamówienia wypisz po przecinku."
