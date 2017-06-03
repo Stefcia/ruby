@@ -8,7 +8,34 @@ zzabawy2 = [:Kolki_Babolki, :zgadywanki]
 sleep 2
 $i = 0
 def rozmowy(ilośćZakręceń, zaczynajacy, co, rozmowca)
-	
+	puts "zacznijmy rozmowy!" 
+	rozmówki = [
+		[:"#{zaczynajacy}", co]
+	]
+	sleep 1
+	rozmówki.each do |metadane|
+		$i = $i+1
+		if $i.odd?
+		 	puts "#{metadane.first} mówi: #{metadane.last}."
+			print "co odpowie #{rozmowca}?"
+			odpowiedź = gets.chomp
+			rozmówki = rozmówki.push([rozmowca, odpowiedź])
+		else
+			
+		end
+	end 
+		if ilośćZakręceń < 1
+			break
+		else
+			ilośćZakręceń = ilośćZakręceń - 1
+		end
+	end
+	sleep 2
+	$i = 0
+	puts "oto rozmowa #{zaczynajacy} i #{rozmowca}:"
+	rozmówki.each do |metadane|
+		puts "- #{metadane.last} - #{["rzekł(a)", "mówi", "powiedział(a)", "mówił(a)", "rzekł(a)", "mówi"].sample} #{metadane.first}."
+	end
 end
 def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca, co)
 	puts "zacznijmy rozmówki!" 
