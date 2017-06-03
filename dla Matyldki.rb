@@ -2,15 +2,18 @@ print "wpisz swój login:"
 imię = gets.chomp
 sleep 3
 system ('cls')
-zabawy = [:Kolki_Babolki, :restauracje_split,:notesik, :zgadywanki, :rozmówki]
-zzabawy = [:zgadywanki, :restauracje_split, :rozmówki,:rozmówki :notesik]
+zabawy = [:Kolki_Babolki, :rozmówki2, :restauracje_split,:notesik, :zgadywanki, :rozmówki]
+zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :rozmówki2 ,:notesik]
 zzabawy2 = [:Kolki_Babolki, :zgadywanki]
 sleep 2
 $i = 0
-def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca)
+def rozmowy(ilośćZakręceń, zaczynajacy, co, rozmowca)
+	
+end
+def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca, co)
 	puts "zacznijmy rozmówki!" 
 	rozmówki = [
-		[:"#{zaczynajacy}", "cześć!"]
+		[:"#{zaczynajacy}", co]
 	]
 	sleep 1
 	rozmówki.each do |metadane|
@@ -19,12 +22,12 @@ def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca)
 		 	puts "#{metadane.first} mówi: #{metadane.last}."
 			print "co odpowie #{rozmowca}?"
 			odpowiedź = gets.chomp
-			rozmówki = rozmówki.push([:"#{rozmowca}", "#{odpowiedź}"])
+			rozmówki = rozmówki.push([rozmowca, odpowiedź])
 		else
 			puts "#{metadane.first} mówi: #{metadane.last}"
 			print "co odpowie #{zaczynajacy}?"
 			odpowiedź = gets.chomp
-			rozmówki = rozmówki.push([:"#{zaczynajacy}", "#{odpowiedź}"])				
+			rozmówki = rozmówki.push([zaczynajacy, odpowiedź])				
 		end 
 		if ilośćZakręceń < 1
 			break
@@ -36,7 +39,7 @@ def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca)
 	$i = 0
 	puts "oto rozmowa #{zaczynajacy} i #{rozmowca}:"
 	rozmówki.each do |metadane|
-		puts "- #{metadane.last} - mówi #{metadane.first}."
+		puts "- #{metadane.last} - #{["rzekł(a)", "mówi", "powiedział(a)", "mówił(a)", "rzekł(a)", "mówi"].sample} #{metadane.first}."
 	end
 end
 sleep 1
