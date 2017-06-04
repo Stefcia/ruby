@@ -6,22 +6,28 @@ zabawy = [:Kolki_Babolki, :rozmówki2, :restauracje_split,:notesik, :zgadywanki,
 zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :rozmówki2 ,:notesik]
 zzabawy2 = [:Kolki_Babolki, :zgadywanki]
 sleep 2
-$i = 0
 def rozmowy(ilośćZakręceń, zaczynajacy, co, rozmowca)
 	puts "zacznijmy rozmowy!" 
+	sleep 1
 	rozmówki = [
-		[:"#{zaczynajacy}", co]
+		[zaczynajacy, co]
 	]
 	sleep 1
+	i = 0
 	rozmówki.each do |metadane|
-		$i = $i+1
-		if $i.odd?
+		sleep 1
+		i = i+1
+		if i.odd?
 		 	puts "#{metadane.first} mówi: #{metadane.last}."
+			sleep 2
 			print "co odpowie #{rozmowca}?"
 			odpowiedź = gets.chomp
 			rozmówki = rozmówki.push([rozmowca, odpowiedź])
 		else
-			
+			case i
+			when 0..4
+				wypowiedź = :"#{["Jak się masz, stary(a)?","o nie! Nie Umyłem(am) dziś zębów!", "Ja się boję iść do twojego domu, bo masz 5 psów.", "nie lubię, gdy się ubierasz na zielono.", "Abrakadabra! (Nie bój się, nie umiem czarować...)"].sample}"
+			end
 		end
 	end 
 		if ilośćZakręceń < 1
@@ -31,20 +37,20 @@ def rozmowy(ilośćZakręceń, zaczynajacy, co, rozmowca)
 		end
 	end
 	sleep 2
-	$i = 0
 	puts "oto rozmowa #{zaczynajacy} i #{rozmowca}:"
 	rozmówki.each do |metadane|
 		puts "- #{metadane.last} - #{["rzekł(a)", "mówi", "powiedział(a)", "mówił(a)", "rzekł(a)", "mówi"].sample} #{metadane.first}."
 	end
 end
 def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca, co)
-	puts "zacznijmy rozmówki!" 
+	puts "zacznijmy rozmówki!"
+	i = 0 
 	rozmówki = [
 		[:"#{zaczynajacy}", co]
 	]
 	sleep 1
 	rozmówki.each do |metadane|
-		$i = $i+1
+		i = i+1
 		if $i.odd?
 		 	puts "#{metadane.first} mówi: #{metadane.last}."
 			print "co odpowie #{rozmowca}?"
@@ -63,7 +69,6 @@ def rozmówki(ilośćZakręceń, zaczynajacy, rozmowca, co)
 		end
 	end
 	sleep 2
-	$i = 0
 	puts "oto rozmowa #{zaczynajacy} i #{rozmowca}:"
 	rozmówki.each do |metadane|
 		puts "- #{metadane.last} - #{["rzekł(a)", "mówi", "powiedział(a)", "mówił(a)", "rzekł(a)", "mówi"].sample} #{metadane.first}."
