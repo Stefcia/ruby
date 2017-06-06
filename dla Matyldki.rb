@@ -24,9 +24,30 @@ def rozmowy(ilośćZakręceń, zaczynajacy, co, rozmowca)
 			odpowiedź = gets.chomp
 			rozmówki = rozmówki.push([rozmowca, odpowiedź])
 		else
+			sleep 1
 			case i
-			when 0..4
-				wypowiedź = :"#{["Jak się masz, stary(a)?","o nie! Nie Umyłem(am) dziś zębów!", "Ja się boję iść do twojego domu, bo masz 5 psów.", "nie lubię, gdy się ubierasz na zielono.", "Abrakadabra! (Nie bój się, nie umiem czarować...)"].sample}"
+			when 0..4 || 24
+				sleep 2
+				wypowiedź = :"#{["Abrakadabra! (Nie bój się, nie umiem czarować...)", "Jak się masz, stary(a)?","o nie! Nie Umyłem(am) dziś zębów!", "Ja się boję iść do twojego domu, bo masz 5 psów.", "nie lubię, gdy się ubierasz na zielono.", "Abrakadabra! (Nie bój się, nie umiem czarować...)"].sample}"
+			when 5..10 || 40
+				sleep 3
+				wypowiedź = :"#{["co robisz ostatnio w domu?", "Nie lubię takiego koloru, jakiego jest moja koszulka...", "Lubię kiedy ubierasz się na niebieskawo-czerwono-fioletowo-zielono.", "co robisz ostatnio w domu?", "Nie lubię takiego koloru, jakiego jest ta koszulka...", "Lubię kiedy ubierasz się na niebieskawo-czerwono-fioletowo-zielono.", "co robisz ostatnio w domu?"].sample}"
+			when 11..17 || 100..104
+				sleep 4
+				wypowiedź = :"#{["Co porobimy?","super...", "mmm... mniam!", "Co porobimy?", "Uwielbiam mleko kozie. Masz jeszcze trochę?", "Lubię twój ser.", "super...", "Uwielbiam mleko owcze. Masz jeszcze trochę?", "Uwielbiam mleko owcze. Masz jeszcze trochę?", "super...", "Uwielbiam mleko owcze. Masz jeszcze trochę?", "Dobrze, że nie masz mleka krowiego.", "jaka ładna sukienka!"].sample}"
+			when 100 || 20
+				sleep 5.5
+				wypowiedź = :"#{["co to jest obora?", "Co jest lepsze: kozie mleko czy owcze mleko?", "? A ja myślałem że nie."].sample}"
+			else
+				if i > 105
+					sleep 6
+					wypowiedź = :"#{["Ile masz owiec, a ile kóz?", "mmm... mniam! oscypek!", "Ile masz owiec, a ile kóz?"].sample}"
+				else
+					sleep 5
+					if i 
+						
+					end
+				end
 			end
 		end
 	end 
