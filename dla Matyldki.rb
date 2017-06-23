@@ -3,8 +3,34 @@ imię = gets.chomp
 sleep 3
 system ('cls')
 zabawy = [:Kolki_Babolki, :rozmówki2, :restauracje_split,:notesik, :zgadywanki, :rozmówki]
-zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :rozmówki2 ,:notesik]
-zzabawy2 = [:Kolki_Babolki, :zgadywanki]
+zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :rozmówki2 ,:notesik, :"Legends; rycerze kontra smoki i inne stwory"]
+zzabawy2 = [:Kolki_Babolki, :zgadywanki, :"Legends; rycerze kontra smoki i inne stwory"]
+sleep 2
+def Legends (użytkownik)
+	rycerze = [
+		{:imię => :"Alfa Romeo Startintrain Tree-Chouse", zycie: 100, siła: 80, zminnosc: 10, zdolnoscAtaku: 70, zdolnoscObrony: 900},
+		{:imię => :"Ajofort Romeo Erackle Alfort", zycie: 245, siła: 100, zwinnosc: 1, zdolnoscAtaku: 100, zdolnoscObrony: 100},
+		{:imię => :"Alfa Alga Arometo Alkret", zycie: 1000, siła: 545, zwinnosc: 4, zdolnoscAtaku: 300, zdolnoscObrony: 80},
+		{:imię => :"Rekory Alga Erackoll Alkret", zycie: 399, siła: 600, zwinnosc: 60, zdolnoscAtaku: 4000, zdolnoscObrony: 4000}
+	]
+	smoki_wojowniki = [
+		{:imię => :"Smok Holiday", zycie: 6000, siła: 59909, zdolnoscAtaku: 8000, zdolnoscObrony: 5000},
+		{:imię => :"Smoczyca Ahestina Ping", zycie: 6900, siła: 6000, zdolnoscAtaku: 6000, zdolnoscObrony: 7000}
+	]
+	while true
+		puts :"Wybierz rycerza:"
+		rycerze.each do |rycerz|
+			case rycerz.class
+			when Hash
+				rycerz.each do |klucz, nazwa|
+					puts :"#{klucz} to #{nazwa} #{rycerz}"
+					sleep 4
+				end
+			end
+		end
+		
+	end
+end
 sleep 2
 def rozmowy(ilośćZakręceń, zaczynajacy, co, rozmowca)
 	puts :"zacznijmy rozmowy!" 
