@@ -4,7 +4,7 @@ sleep 3
 system ('cls')
 zabawy = [:Kolki_Babolki, :rozmówki2, :restauracje_split,:notesik, :zgadywanki, :rozmówki]
 zzabawy = [:zgadywanki, :restauracje_split, :rozmówki, :rozmówki2 ,:notesik, :"Legends; rycerze kontra smoki i inne stwory"]
-zzabawy2 = [:Kolki_Babolki, :zgadywanki, :"Legends; rycerze kontra smoki i inne stwory"]
+zzabawy2 = [:Kolki_Babolki, :zgadywanki, :"Legends; wojownicy kontra smoki i inne stwory"]
 sleep 2
 def Legends (użytkownik)
 	rycerze = [
@@ -17,18 +17,24 @@ def Legends (użytkownik)
 		{:imię => :"Smok Holiday", zycie: 6000, siła: 59909, zdolnoscAtaku: 8000, zdolnoscObrony: 5000},
 		{:imię => :"Smoczyca Ahestina Ping", zycie: 6900, siła: 6000, zdolnoscAtaku: 6000, zdolnoscObrony: 7000}
 	]
+	inne_potwory = [
+		{:imię => :Seal, :typ => :"sowo-nietoperzo-smok", zycie: 600, siła: 700, zdolnoscAtaku: 800, zdolnoscObrony: 900}
+	]
 	while true
-		puts :"Wybierz rycerza:"
+		puts :"Wybierz rycerza lub wojownika:"
 		rycerze.each do |rycerz|
 			case rycerz.class
 			when Hash
+				sleep 3
 				rycerz.each do |klucz, nazwa|
-					puts :"#{klucz} to #{nazwa} #{rycerz}"
+					puts :"#{klucz} to #{nazwa} z #{rycerz}"
 					sleep 4
 				end
 			end
 		end
-		
+		smoki_wojowniki.each do ||
+			
+		end
 	end
 end
 sleep 2
@@ -199,7 +205,7 @@ sleep 2
 tlf = sprawdź imię, hasło, daneUżytkownikow
 sleep 1
 puts :"sprawdzone, czy masz poprawne dane."
-if tlf == true
+if tlf 
 	tajne = :tak
 else
 	tajne = :nie
