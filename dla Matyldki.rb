@@ -32,8 +32,13 @@ def Legends (użytkownik)
 				end
 			end
 		end
-		smoki_wojowniki.each do ||
-			
+		smoki_wojowniki.each do |klucz, cos_od_smoka|
+			puts :"#{cos_od_smoka} jest  od #{klucz},"
+			sleep 1
+			puts :"..."
+			sleep 1
+			puts :"Który pochodzi z #{smoki_wojowniki}"
+			sleep 1
 		end
 	end
 end
