@@ -8,17 +8,18 @@ zzabawy2 = [:Kolki_Babolki, :zgadywanki, :"Legends; wojownicy kontra smoki i inn
 sleep 2
 def Legends (użytkownik)
 	rycerze = [
-		{:imię => :"Alfa Romeo Startintrain Tree-Chouse", zycie: 100, siła: 80, zminnosc: 10, zdolnoscAtaku: 70, zdolnoscObrony: 900},
-		{:imię => :"Ajofort Romeo Erackle Alfort", zycie: 245, siła: 100, zwinnosc: 1, zdolnoscAtaku: 100, zdolnoscObrony: 100},
-		{:imię => :"Alfa Alga Arometo Alkret", zycie: 1000, siła: 545, zwinnosc: 4, zdolnoscAtaku: 300, zdolnoscObrony: 80},
-		{:imię => :"Rekory Alga Erackoll Alkret", zycie: 399, siła: 600, zwinnosc: 60, zdolnoscAtaku: 4000, zdolnoscObrony: 4000}
+		{:imię => :"Alfa Romeo Startintrain Tree-Chouse", moc: nil, zycie: 100, siła: 80, zminnosc: 10, zdolnoscAtaku: 70, zdolnoscObrony: 900},
+		{:imię => :"Ajofort Romeo Erackle Alfort", moc: nil, zycie: 245, siła: 100, zwinnosc: 1, zdolnoscAtaku: 100, zdolnoscObrony: 100},
+		{:imię => :"Alfa Alga Arometo Alkret", moc: nil, zycie: 1000, siła: 545, zwinnosc: 4, zdolnoscAtaku: 300, zdolnoscObrony: 80},
+		{:imię => :"Rekory Alga Erackoll Alkret", :moc => :"Moc do Wyrywania Gór(MWG)", zycie: 399, siła: 600, zwinnosc: 60, zdolnoscAtaku: 4000, zdolnoscObrony: 4000}
 	]
 	smoki_wojowniki = [
-		{:imię => :"Smok Holiday", zycie: 6000, siła: 59909, zdolnoscAtaku: 8000, zdolnoscObrony: 5000},
-		{:imię => :"Smoczyca Ahestina Ping", zycie: 6900, siła: 6000, zdolnoscAtaku: 6000, zdolnoscObrony: 7000}
+		{:imię => :"Smok Holiday", :moc => :"moc - taka jak u smoków - WIELKIEGO OGNIA", zycie: 6000, siła: 59909, zdolnoscAtaku: 8000, zdolnoscObrony: 5000},
+		{:imię => :"Smoczyca Ahestina Ping", :moc => :"moc hipnotyzacjii", zycie: 6900, siła: 6000, zdolnoscAtaku: 6000, zdolnoscObrony: 7000}
 	]
 	inne_potwory = [
-		{:imię => :Seal, :typ => :"sowo-nietoperzo-smok", zycie: 600, siła: 700, zdolnoscAtaku: 800, zdolnoscObrony: 900}
+		{:imię => :"Siziki Szakrow prey", :typ => :"gryfo-dziwczę", :moc => },
+		{:imię => :Seal, :typ => :"sowo-nietoperzo-smok", :moc => :"moc hipnotyzacjii i moc wielkiego strachu", zycie: 600, siła: 700, zdolnoscAtaku: 800, zdolnoscObrony: 900}
 	]
 	while true
 		puts :"Wybierz rycerza lub wojownika:"
@@ -216,5 +217,4 @@ else
 	tajne = :nie
 end
 if tajne == :nie
-	
 end
