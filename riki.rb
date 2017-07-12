@@ -4,7 +4,7 @@ false
 puts :"Witamy w Ruby, świecie rb!"
 sleep 1
 
-ab = (0..10)
+ab = (0..10).to_a
 
 a = 1
 a
@@ -28,11 +28,13 @@ menu = {
 		zupa_szpinakowa: 5,
 		pomidorówka: 4.50,
 		rosół: 3,
+		zupa_Janka: 4,
 		:informacja => :"zupa dnia jest zawsze: pomidorówka czwarek i poniedziałek, rosół - wtorek, zupa szpinakowa - środa, zupa Janka - sobota i niedziela, niespodzianka - piątek."
 	}
 }
 b = [1, 2, true, nil, false, :a, :b, :c, {}]
 b = b.push (menu)
+b
 [:d, :c, :a, :b, b, menu, :c].sample
 
 rand(130)
@@ -60,6 +62,15 @@ while true
 	end
 end
 
-def create_name (name, to)
-	
+def dodaj_do_tablicy (do_tablicy, tablica)
+	puts :"#{do_tablicy} do #{tablica}"
+	blabla = tablica.push (do_tablicy)
+	blabla
+end
+
+def do_pliku (do_pliku, plik)
+	file = File.open(plik, 'a+')
+	file.puts(:"#{do_pliku}")
+	file.read
+	fle.close
 end
