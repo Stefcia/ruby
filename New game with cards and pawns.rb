@@ -1,5 +1,5 @@
 puts "Włączam menu główne gry 'niezwykła podróż'. 
-Proszę czekać a dalsze instrukcje."
+Proszę czekać na dalsze instrukcje."
 while true
 	sleep 4.3
 	puts "Wpisz, co mam wykonać."
@@ -11,6 +11,10 @@ while true
 	wybór = gets.chomp
 	if wybór == 'wyjdź'
 		break
+	else
+		if wybór == 'instrukcja'
+			
+		end
 	end
 end
-puts "koniec gry. Wpisz Enter"
+puts "koniec gry. Naciśnij klawisz Enter"
