@@ -1,7 +1,11 @@
 def instrukcja
-	puts "Gra toczy się tak(załóżmy, że wybrłeś'graj'):
+	puts "Gra toczy się tak(załóżmy, że wybrałeś 'graj'):
 	1.) Wchodzisz(co już zrobiłeś) w menu główne i wybieraz graj, wyjdz lub instrukcja.
-	2.) Włącza się gra i... grasz(czasami musisz trochę poczekać)!"
+	2.) Włącza się gra i... grasz(czasami musisz trochę poczekać)
+	3.) Komputer tworzy 'planszę'.
+	4.) Wpisujesz cyfrę.
+	5.) Komputer losuje parę razy.
+	6.) liczba wylosowana przez komputer jest tą, która"
 end
 def menu_glowne
 	sleep 4.3
@@ -12,7 +16,7 @@ def menu_glowne
 	sleep 2
 	puts "#{wybor}... wyszukuję... proszę czekać... #{wybor}..."
 	sleep 1
-	puts wybor
+	puts "#{wybor}..."
 	case wybor
 	when "wyjdz"
 		system ('cls')
