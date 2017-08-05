@@ -1,3 +1,5 @@
+require 'C:\Users\admin\Documents\ruby\LeR\Robot.rb'
+require 'C:\Users\admin\Documents\ruby\LeR\Robowalka.rb'
 r1 = Robot.new(:r4, 55, 10,10, 50, 25)
 r2 = Robot.new("r#{[:s, "t", 5].object_id}", 77, 5,5, 40, 45)
 r3 = Robot.new("r3", 100, 60, 40, 500, 500)
@@ -55,3 +57,22 @@ final3 = [
 	[allen, r2],
 	[fu, średni_r]
 ]
+
+def grajmy(lista)
+	lista.each do |elementTablicy|
+		if elementTablicy.class == Array
+			w1 = RoboWalka.new(elementTablicy.first, elementTablicy.last)
+			w1.walczmy
+		elsif elementTablicy.class == RoboWalka
+			elementTablicy.walczmy
+		end
+		print "CZY CHCESZ ZOBACZYĆ RoboWALKĘ JESZCZE RAZ(inną)?"
+		tln = gets.chomp
+		if tln == 'tak'
+			sleep 1
+			system ('cls')
+		else
+			break
+		end
+	end
+end
