@@ -9,14 +9,18 @@ class RoboWalka
 	attr_reader :roboWyzywajacy, :roboAkceptujacy, :początekWalki, :koniecWalki, :roboZwyciezca, :roboPrzegrany
 
 	def initialize(robo1, robo2)
+		@roboWyzywajacy = robo1
+		@roboAkceptujacy = robo2
 		#stRoboWyzywajacy{ :Robot }
 		@początekWalki = Time.now
-		@roboWyzywajacy = {
+		@stRoboWyzywajacy = {
 			:Robot => robo1,
 			krytyczneAtaki: 0,
 			krytyczneObrony: 0,
 			udaneAtaki: 0,
 			udaneObrony: 0,
+			nieudaneObrony: 0,
+			nieudaneAtaki: 0,
 			:najlepszyAtak => {
 				obrażenia: 0, 
 				runda: 0, 
@@ -32,15 +36,17 @@ class RoboWalka
 			dostał: 0, 
 			:rodzaj => nil},
 			:Aktualizacja => Time.now,
-			:Rozwalenie => nil
+			:ZakonczenieJegoWalki => nil
 		}
 		sleep 0.23
-		@roboAkceptujacy = {
-			:Robot => robo2,
+		@stRoboAkceptujacy = {
+			:Robot => robo1,
 			krytyczneAtaki: 0,
 			krytyczneObrony: 0,
 			udaneAtaki: 0,
 			udaneObrony: 0,
+			nieudaneObrony: 0,
+			nieudaneAtaki: 0,
 			:najlepszyAtak => {
 				obrażenia: 0, 
 				runda: 0, 
@@ -56,8 +62,9 @@ class RoboWalka
 			dostał: 0, 
 			:rodzaj => nil},
 			:Aktualizacja => Time.now,
-			:Rozwalenie => nil
+			:ZakonczenieJegoWalki => nil
 		}
+		@statystyczki = {robo1 => stRoboWyzywajacy, robo2 => stRoboAkceptujacy}
 	end
 	
 	def obrona(roboBroniacy, roboAtakujacy)
@@ -70,9 +77,14 @@ class RoboWalka
 			when WynikAkcji::KRYTYCZNY_SUKCES 
 				puts "OBRONA KRYTYCZNA! #{roboBroniacy} broni się jak robo-mistrz! Nie tylko odpiera atak, ale sam atakuje... #{roboAtakujacy} jest tak zaskoczony, że aż zaiskrzyły mu obwody i nie jest w stanie nic zrobić!" 
 				sleep 1
+				st = @statystyczki[roboBroniacy]
+				st[:udaneObrony] = st[:udaneObrony] + 1
+				st[:krytyczneObrony] = st[:krytyczneObrony] + 1
 				roboBroniacy.wykonajAtak(roboAtakujacy, Atak.new(roboAtakujacy.zdolnoscAtaku, rand(5)+1))
 			when WynikAkcji::SUKCES
 				puts "UDANA OBRONA! #{roboBroniacy} skutecznie się broni."
+				st = @statystyczki[roboBroniacy]
+				st[:udaneObrony] = st[:udaneObrony] + 1 
 				sleep 1
 			when WynikAkcji::PORAZKA
 				puts "#{roboBroniacy} nie jest w stanie się obronić..."
@@ -129,17 +141,17 @@ class RoboWalka
 	end
 	
 	def sprawdzCzyKoniec?
-		#puts "#{@roboWyzywajacy[:Robot].zycie} "
-		koniec = (@roboWyzywajacy[:Robot].zycie<1 || @roboAkceptujacy[:Robot].zycie<1)
+		#puts "#{@roboWyzywajacy.zycie} "
+		koniec = (@roboWyzywajacy.zycie<1 || @roboAkceptujacy.zycie<1)
 		if koniec
-			if @roboWyzywajacy[:Robot].zycie < 1
-				@roboZwyciezca = @roboAkceptujacy[:Robot]
-				@roboPrzegrany = @roboWyzywajacy[:Robot]
-				@roboWyzywajacy[:Rozwalenie] = Time.now			
+			if @roboWyzywajacy.zycie < 1
+				@roboZwyciezca = @roboAkceptujacy
+				@roboPrzegrany = @roboWyzywajacy
+				@stRoboWyzywajacy[:ZakonczenieJegoWalki] = Time.now			
 			else
-				@roboZwyciezca = @roboWyzywajacy[:Robot]
-				@roboPrzegrany = @roboAkceptujacy[:Robot]
-				@roboAkceptujacy[:Rozwalenie] = Time.now
+				@roboZwyciezca = @roboWyzywajacy
+				@roboPrzegrany = @roboAkceptujacy
+				@stRoboAkceptujacy[:ZakonczenieJegoWalki] = Time.now
 			end
 			@koniecWalki = Time.now
 			puts "Koniec walki! Wygrany: #{roboZwyciezca} - przegrany: #{roboPrzegrany}, którego koledzy zbierają jeszcze jego śrubki z areny..."
@@ -155,9 +167,9 @@ class RoboWalka
 		until sprawdzCzyKoniec?
 			puts " ***************** Akcja #{akcjaWalki}. ***************** \n#{roboWyzywajacy} ma #{roboWyzywajacy.zycie} punktów życia.\n#{roboAkceptujacy} ma #{roboAkceptujacy.zycie} punktów życia."
 			if akcjaWalki.odd?
-				atak(@roboAkceptujacy, @roboWyzywajacy[:Robot])
+				atak(@roboAkceptujacy, @roboWyzywajacy)
 			else
-				atak(@roboWyzywajacy[:Robot], @roboAkceptujacy)			
+				atak(@roboWyzywajacy, @roboAkceptujacy)			
 			end
 			akcjaWalki =  akcjaWalki+1
 		end
