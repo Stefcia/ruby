@@ -9,9 +9,55 @@ class RoboWalka
 	attr_reader :roboWyzywajacy, :roboAkceptujacy, :początekWalki, :koniecWalki, :roboZwyciezca, :roboPrzegrany
 
 	def initialize(robo1, robo2)
+		#stRoboWyzywajacy{ :Robot }
 		@początekWalki = Time.now
-		@roboWyzywajacy = robo1
-		@roboAkceptujacy = robo2
+		@roboWyzywajacy = {
+			:Robot => robo1,
+			krytyczneAtaki: 0,
+			krytyczneObrony: 0,
+			udaneAtaki: 0,
+			udaneObrony: 0,
+			:najlepszyAtak => {
+				obrażenia: 0, 
+				runda: 0, 
+				:rodzaj => nil}, 
+			:najgorszyAtak => {
+				obrażenia: 0, 
+				runda: 0, 
+				:rodzaj => nil},
+			:najlepszaObrona => {
+				runda: 0,
+				:rodzaj => nil},
+			:najgorszaObrona => {
+			dostał: 0, 
+			:rodzaj => nil},
+			:Aktualizacja => Time.now,
+			:Rozwalenie => nil
+		}
+		sleep 0.23
+		@roboAkceptujacy = {
+			:Robot => robo2,
+			krytyczneAtaki: 0,
+			krytyczneObrony: 0,
+			udaneAtaki: 0,
+			udaneObrony: 0,
+			:najlepszyAtak => {
+				obrażenia: 0, 
+				runda: 0, 
+				:rodzaj => nil}, 
+			:najgorszyAtak => {
+				obrażenia: 0, 
+				runda: 0, 
+				:rodzaj => nil},
+			:najlepszaObrona => {
+				runda: 0,
+				:rodzaj => nil},
+			:najgorszaObrona => {
+			dostał: 0, 
+			:rodzaj => nil},
+			:Aktualizacja => Time.now,
+			:Rozwalenie => nil
+		}
 	end
 	
 	def obrona(roboBroniacy, roboAtakujacy)
@@ -83,18 +129,21 @@ class RoboWalka
 	end
 	
 	def sprawdzCzyKoniec?
-		#puts "#{@roboWyzywajacy.zycie} "
-		koniec = (@roboWyzywajacy.zycie<1 || @roboAkceptujacy.zycie<1)
+		#puts "#{@roboWyzywajacy[:Robot].zycie} "
+		koniec = (@roboWyzywajacy[:Robot].zycie<1 || @roboAkceptujacy[:Robot].zycie<1)
 		if koniec
-			if @roboWyzywajacy.zycie < 1
-				@roboZwyciezca = @roboAkceptujacy
-				@roboPrzegrany = @roboWyzywajacy				
+			if @roboWyzywajacy[:Robot].zycie < 1
+				@roboZwyciezca = @roboAkceptujacy[:Robot]
+				@roboPrzegrany = @roboWyzywajacy[:Robot]
+				@roboWyzywajacy[:Rozwalenie] = Time.now			
 			else
-				@roboZwyciezca = @roboWyzywajacy
-				@roboPrzegrany = @roboAkceptujacy
+				@roboZwyciezca = @roboWyzywajacy[:Robot]
+				@roboPrzegrany = @roboAkceptujacy[:Robot]
+				@roboAkceptujacy[:Rozwalenie] = Time.now
 			end
 			@koniecWalki = Time.now
 			puts "Koniec walki! Wygrany: #{roboZwyciezca} - przegrany: #{roboPrzegrany}, którego koledzy zbierają jeszcze jego śrubki z areny..."
+			puts "PODSUMOWANIE: #{roboZwyciezca} zadał ... obrażeń, odniósł ... obrażeń. Najlepszy cios: ... obrażeń. KRYTYCZNE SUKCESY: ... w ataku i ... w obronie. KRYTYCZNE PORAŻKI: ... w ataku i ... w obronie.  "
 		end
 		return koniec
 	end
@@ -106,9 +155,9 @@ class RoboWalka
 		until sprawdzCzyKoniec?
 			puts " ***************** Akcja #{akcjaWalki}. ***************** \n#{roboWyzywajacy} ma #{roboWyzywajacy.zycie} punktów życia.\n#{roboAkceptujacy} ma #{roboAkceptujacy.zycie} punktów życia."
 			if akcjaWalki.odd?
-				atak(@roboAkceptujacy, @roboWyzywajacy)
+				atak(@roboAkceptujacy, @roboWyzywajacy[:Robot])
 			else
-				atak(@roboWyzywajacy, @roboAkceptujacy)			
+				atak(@roboWyzywajacy[:Robot], @roboAkceptujacy)			
 			end
 			akcjaWalki =  akcjaWalki+1
 		end
@@ -157,4 +206,3 @@ end
 class Obrona < Akcja
 
 end
-
